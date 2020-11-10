@@ -1,7 +1,9 @@
 import React from 'react'
 import './App.scss'
+import { Burgers }  from './Utils/ProductItems'
 
-function App() {
+const App = () => {
+    console.log(Burgers);
     return (
         <div className="App">
             <h1>Testing</h1>
