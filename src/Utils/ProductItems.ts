@@ -4,7 +4,7 @@ export const Burgers = [
         imgSrc: 'hamburger.jpg',
         price: 20
     },
-    {
+    { 
         name: 'Cheeseburger',
         imgSrc: 'cheeseburger.jpg',
         price: 25

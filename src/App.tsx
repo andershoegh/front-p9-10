@@ -1,12 +1,14 @@
 import React from 'react'
 import './App.scss'
 import { Burgers }  from './Utils/ProductItems'
+import ItemCard from './Components/ItemCard'
 
 const App = () => {
-    console.log(Burgers);
+  const burger = Burgers[0];
+
     return (
         <div className="App">
-            <h1>Testing</h1>
+            <ItemCard name={burger.name} imgSrc={burger.imgSrc}/>
         </div>
     )
 }
