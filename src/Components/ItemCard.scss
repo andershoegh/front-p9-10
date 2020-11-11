@@ -8,14 +8,14 @@ $scale: 10;
   height: 20px * $scale;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0px 8px 40px change-color($color: #000000, $alpha: .1);
+  box-shadow: 0px 8px 40px rgba(0, 0, 0, .1);
 
   display: flex;
   flex-direction: column;
 
   font-family: 'Open Sans', sans-serif;
   font-size: .09em * $scale;
-  color: change-color($color: #000000, $alpha: .5);
+  color: rgba(0, 0, 0, .5);
   font-weight: 700;
 
   transition: all .3s;
