@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import WelcomePage from './Components/Pages/WelcomePage'
 import advertisement from './Resources/Images/advertisement.svg'
-import { Burgers }  from './Utils/ProductItems'
 
 const App = () => {
-    console.log(Burgers);
     return (
         <Router>
             <div className="App">
