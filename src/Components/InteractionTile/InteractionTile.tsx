@@ -1,14 +1,18 @@
 import * as React from 'react'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './InteractionTile.scss'
 
-const InteractionTile: React.FC<{
+interface InteractionTileProps {
     icon: () => {}
     text: string
     link: string
-}> = ({ icon, text, link }) => {
-    let match = useRouteMatch()
-    console.log(match)
+}
+
+const InteractionTile: React.FC<InteractionTileProps> = ({
+    icon,
+    text,
+    link,
+}) => {
     return (
         <Link to={link}>
             <div className="tile">
