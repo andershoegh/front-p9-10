@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
 import MainPage from './Components/Pages/MainPage/MainPage'
-import WelcomePage from './Components/Pages/WelcomePage'
-import MainPage from './Components/Pages/MainPage'
+import WelcomePage from './Components/Pages/WelcomePage/WelcomePage'
 import advertisement from './Resources/Images/advertisement.svg'
 import { DummyOrder } from './Utils/Order';
 

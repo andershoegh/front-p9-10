@@ -1,10 +1,10 @@
 import React from 'react'
 import './WelcomePage.scss'
-import HandGesturesIcon from '../../Resources/Icons/HandGesturesIcon'
-import QRIcon from '../../Resources/Icons/QRIcon'
-import TouchIcon from '../../Resources/Icons/TouchIcon'
-import InteractionTile from '../InteractionTile/InteractionTile'
-import FLAIcon from '../../Resources/Icons/FLAIcon'
+import HandGesturesIcon from '../../../Resources/Icons/HandGesturesIcon'
+import QRIcon from '../../../Resources/Icons/QRIcon'
+import TouchIcon from '../../../Resources/Icons/TouchIcon'
+import InteractionTile from '../../InteractionTile/InteractionTile'
+import FLAIcon from '../../../Resources/Icons/FLAIcon'
 
 export interface WelcomePageProps {}
 
