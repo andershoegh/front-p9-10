@@ -1,0 +1,65 @@
+.order-details-wrapper{
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+}
+.order-details-header{
+    background-color: #FFBE5F;
+    color: #fff;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 2px;
+    padding: 30px 50px;
+    margin: 20px 0px;
+    
+}
+
+.order-details-button-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  
+    button{
+      width: 50%;
+      padding: 20px; 
+      border-radius: 10px;
+      border: none;
+      font-size: 28px;
+      font-weight: 600;
+      color: #fff;
+      margin: 20px;
+    }
+    .finish-btn{
+        background-color: #01C9B3;
+        margin-left: 10px;
+    }
+    .cancel-btn{
+        background-color: #D29099;
+        margin-right: 10px;
+    }
+}
+
+.order-details{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    padding: 20px 30px;
+    font-size: 28px;
+    font-weight: 600;
+    width: 100vw;
+    div{
+        
+        padding: 0px 25px;
+        min-width: 23%;
+        text-align: center;
+        p{
+            margin: 10px 0px;
+        }
+    }
+    div:not(:last-child){
+        border-right: 2px solid black;
+    }
+}
