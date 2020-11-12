@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import WelcomePage from './Components/Pages/WelcomePage'
+import MainPage from './Components/Pages/MainPage'
 import advertisement from './Resources/Images/advertisement.svg'
 
 type Drink = {
@@ -69,7 +70,7 @@ const App = () => {
             </div>
             <Switch>
                 <Route path="/mainpage">
-                    <></>
+                    <MainPage />
                 </Route>
                 <Route path="/menuselection">
                     <></>
