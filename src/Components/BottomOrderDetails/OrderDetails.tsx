@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useMemo } from 'react';
 import { Desserts } from '../../Utils/ProductItems';
 import './OrderDetails.scss'
 
@@ -23,7 +23,7 @@ export interface OrderDetailsProps {
    desserts: MenuItem[];
 }
  
-const OrderDetails: React.SFC<OrderDetailsProps> = (props: OrderDetailsProps) => {
+const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsProps) => {
     const {drinks, burgers, sides, menus, desserts} = props;
 
     const getItemsPrice = (items: MenuItem[]) => items.reduce((total: number, item: MenuItem)=> total + item.price, 0 );
@@ -31,18 +31,18 @@ const OrderDetails: React.SFC<OrderDetailsProps> = (props: OrderDetailsProps) =>
        return  menus.reduce((total: number, menu: Menu) => total + menu.burger.price + menu.drink.price + menu.side.price, 0);
     } 
    
-    const menuItemsCost: number = React.useMemo(()=> {
+    const menuItemsCost: number = useMemo(()=> {
         return getItemsPrice(drinks) + getItemsPrice(burgers) + getItemsPrice(sides) + getItemsPrice(desserts);
     }, [drinks, burgers, sides]);
     
-    const menusCost =  React.useMemo(()=> getMenusPrice(menus), [menus]);
+    const menusCost =  useMemo(()=> getMenusPrice(menus), [menus]);
 
-    const vat = React.useMemo(()=>{
+    const vat = useMemo(()=>{
         const price: number = menuItemsCost + menusCost;
         return price - price/1.25;
     }, [ menusCost, menuItemsCost]);
 
-    const getItemsAmount = React.useMemo(()=>{
+    const getItemsAmount = useMemo(()=>{
         const propKeys: string[] = Object.keys(props);
         return propKeys.reduce((total: number, key: string)=> total + props[key as keyof OrderDetailsProps].length, 0);
     }, [ props ]);
