@@ -1,0 +1,46 @@
+.headline {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 42px;
+    color: #787878;
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+.singleItems {
+    display: flex;
+    grid-template-rows: auto;
+    flex-wrap: wrap;
+    row-gap: 20px;
+    margin-left: 20px;
+}
+
+.menuCard {
+    width: 720px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.1);
+
+    transition: all 0.3s;
+    transform-origin: center;
+
+    :focus {
+        box-shadow: 0px 0px 40px #fdd68b;
+        transform: scale(1.1);
+        outline: none;
+    }
+}
+
+.menuCardItems {
+    display: flex;
+    width: 100%;
+}
+
+.menuDisplay {
+    display: flex;
+    grid-template-rows: auto;
+}
