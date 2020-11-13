@@ -12,6 +12,7 @@ export const DummyOrder = {
             drink: Drinks[0],
             side: Sides[0],
             type: 'menu' as const,
+            amount: 1,
         },
     ],
     sides: [

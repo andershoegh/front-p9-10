@@ -53,6 +53,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                                 </div>
                             </div>
                             <Stepper
+                                amount={menu.amount}
                                 increment={increment}
                                 decrement={decrement}
                             />
@@ -64,7 +65,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                 <div className="singleItems">
                     {burgers.map((burger) => {
                         return (
-                            <div className="singleItemBlock">
+                            <div key={burger.name} className="singleItemBlock">
                                 <FlatItemCard
                                     name={burger.name}
                                     imgSrc={burger.imgSrc}
@@ -72,6 +73,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                                 <Stepper
                                     increment={increment}
                                     decrement={decrement}
+                                    amount={burger.amount}
                                 />
                             </div>
                         )
@@ -86,6 +88,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                                 <Stepper
                                     increment={increment}
                                     decrement={decrement}
+                                    amount={drink.amount}
                                 />
                             </div>
                         )
@@ -100,6 +103,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                                 <Stepper
                                     increment={increment}
                                     decrement={decrement}
+                                    amount={side.amount}
                                 />
                             </div>
                         )
@@ -114,6 +118,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                                 <Stepper
                                     increment={increment}
                                     decrement={decrement}
+                                    amount={dessert.amount}
                                 />
                             </div>
                         )

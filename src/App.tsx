@@ -11,24 +11,28 @@ export type Drink = {
     imgSrc: string
     price: number
     type: 'drink'
+    amount: number
 }
 export type Burger = {
     name: string
     imgSrc: string
     price: number
     type: 'burger'
+    amount: number
 }
 export type Side = {
     name: string
     imgSrc: string
     price: number
     type: 'side'
+    amount: number
 }
 export type Menu = {
     side: Side
     burger: Burger
     drink: Drink
     type: 'menu'
+    amount: number
 }
 
 export type Dessert = {
@@ -36,6 +40,7 @@ export type Dessert = {
     imgSrc: string
     price: number
     type: 'dessert'
+    amount: number
 }
 
 export type newItem = {
