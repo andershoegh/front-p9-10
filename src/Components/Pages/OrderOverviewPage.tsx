@@ -64,7 +64,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                 <div className="singleItems">
                     {burgers.map((burger) => {
                         return (
-                            <div>
+                            <div className="singleItemBlock">
                                 <FlatItemCard
                                     name={burger.name}
                                     imgSrc={burger.imgSrc}
@@ -78,7 +78,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                     })}
                     {drinks.map((drink) => {
                         return (
-                            <div>
+                            <div className="singleItemBlock">
                                 <FlatItemCard
                                     name={drink.name}
                                     imgSrc={drink.imgSrc}
@@ -106,7 +106,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                     })}
                     {desserts.map((dessert) => {
                         return (
-                            <div>
+                            <div className="singleItemBlock">
                                 <FlatItemCard
                                     name={dessert.name}
                                     imgSrc={dessert.imgSrc}
