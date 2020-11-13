@@ -12,7 +12,7 @@ const Stepper: React.FC<StepperProps> = ({ decrement, increment }) => {
             <button onClick={decrement} className="stepperItem">
                 -
             </button>
-            <div className="stepperItem">5</div>
+            <div>5</div>
             <button onClick={increment} className="stepperItem">
                 +
             </button>

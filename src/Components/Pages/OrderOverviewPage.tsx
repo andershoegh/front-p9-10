@@ -64,34 +64,58 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({
                 <div className="singleItems">
                     {burgers.map((burger) => {
                         return (
-                            <FlatItemCard
-                                name={burger.name}
-                                imgSrc={burger.imgSrc}
-                            ></FlatItemCard>
+                            <div>
+                                <FlatItemCard
+                                    name={burger.name}
+                                    imgSrc={burger.imgSrc}
+                                ></FlatItemCard>
+                                <Stepper
+                                    increment={increment}
+                                    decrement={decrement}
+                                />
+                            </div>
                         )
                     })}
                     {drinks.map((drink) => {
                         return (
-                            <FlatItemCard
-                                name={drink.name}
-                                imgSrc={drink.imgSrc}
-                            ></FlatItemCard>
+                            <div>
+                                <FlatItemCard
+                                    name={drink.name}
+                                    imgSrc={drink.imgSrc}
+                                ></FlatItemCard>
+                                <Stepper
+                                    increment={increment}
+                                    decrement={decrement}
+                                />
+                            </div>
                         )
                     })}
                     {sides.map((side) => {
                         return (
-                            <FlatItemCard
-                                name={side.name}
-                                imgSrc={side.imgSrc}
-                            ></FlatItemCard>
+                            <div className="singleItemBlock">
+                                <FlatItemCard
+                                    name={side.name}
+                                    imgSrc={side.imgSrc}
+                                ></FlatItemCard>
+                                <Stepper
+                                    increment={increment}
+                                    decrement={decrement}
+                                />
+                            </div>
                         )
                     })}
                     {desserts.map((dessert) => {
                         return (
-                            <FlatItemCard
-                                name={dessert.name}
-                                imgSrc={dessert.imgSrc}
-                            ></FlatItemCard>
+                            <div>
+                                <FlatItemCard
+                                    name={dessert.name}
+                                    imgSrc={dessert.imgSrc}
+                                ></FlatItemCard>
+                                <Stepper
+                                    increment={increment}
+                                    decrement={decrement}
+                                />
+                            </div>
                         )
                     })}
                 </div>
