@@ -1,5 +1,9 @@
-.carousel-slide{
-    display: flex;
-    height: 100%;
+.carousel-wrapper {
+    float: left;
+    width: auto;
+    height: 60vh;
     overflow: hidden;
+}
+.carousel-slide {
+    display: flex;
 }
