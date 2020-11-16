@@ -5,18 +5,20 @@ import ItemCard from '../ItemCard'
 export interface OrderSelectionModalInterface {
   showModal: boolean
   toggleModal: CallableFunction
-  itemName: string;
+  handleMenu: CallableFunction
 }
 
 const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
-  const { showModal, toggleModal, itemName } = props;
+  const { showModal, toggleModal, handleMenu } = props;
   const modal = document.getElementById("modal")!;
 
   const orderSelection = (type: string) => {
     if (type === 'Single') {
-      toggleModal(false, false);
+      toggleModal(false);
+      handleMenu(false);
     } else if (type === 'Menu') {
-      toggleModal(false, true);
+      toggleModal(false);
+      handleMenu(true);
     }
   }
 

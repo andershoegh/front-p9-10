@@ -5,23 +5,26 @@ import OrderDetails from '../../BottomOrderDetails/OrderDetails';
 import ItemGrid from '../../ItemGrid/ItemGrid'
 import OrderSelectionModal from '../../OrderSelectionModal/OrderSelectionModal'
 
+
 export interface MainPageProps {
     addItemToOrder: (item: newItem) => void;
 }
  
 const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [selectedItem, setSelectedItem] = useState<string>('');
+    const [selectedItem, setSelectedItem] = useState<menuItem>(Products.Burgers[0]);
     type categories = 'Burgers' | 'Drinks' | 'Sides' | 'Desserts';
     const [selectedCategory, setSelectedCategory] = useState<categories>('Burgers');
 
-    const toggleModal = (toggle: boolean, item: newItem, isMenu: boolean) => {
+    const toggleModal = (toggle: boolean, item: menuItem) => {
         setShowModal(toggle);
-        setSelectedItem(item.type);
-        
-        if(!isMenu) {
-            props.addItemToOrder(item);
-        }
+        setSelectedItem(item);
+    }
+
+    const handleMenu = (isMenu: boolean) => {
+      if(!isMenu) {
+        props.addItemToOrder(selectedItem as unknown as newItem);
+      }
     }
     
     return ( 
@@ -35,7 +38,7 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
                 toggleModal={toggleModal} 
                 addItemToOrder={props.addItemToOrder}
                 category='Burgers' items={Products[selectedCategory]} />
-            <OrderSelectionModal showModal={showModal} toggleModal={toggleModal} itemName={selectedItem} />
+            <OrderSelectionModal showModal={showModal} toggleModal={toggleModal} handleMenu={handleMenu} />
         </div>
      );
 }
