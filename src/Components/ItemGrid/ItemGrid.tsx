@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ItemCard from '../ItemCard'
+import ItemCard from '../ItemCard/ItemCard'
 import './ItemGrid.scss'
 
 export interface ItemGridProps {
