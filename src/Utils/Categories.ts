@@ -23,10 +23,5 @@ export const Categories: Category[] = [
         name: 'Desserts',
         type: 'dessert',
         imgSrc: 'iceCreamCone.jpg',
-    },
-    {
-        name: 'Chicken',
-        type: 'chicken',
-        imgSrc: 'hotWings.jpg',
-    },
+    }
 ]

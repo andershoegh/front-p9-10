@@ -49,8 +49,8 @@ const App = () => {
     const [desserts, setDesserts] = useState<Dessert[]>([
         ...DummyOrder.desserts,
     ])
-    const [menus, setMenus] = useState<Menu[]>([...DummyOrder.menus])
-
+    const [menus, setMenus] = useState<Menu[]>([...DummyOrder.menus]);
+    const [category, setCategory] = useState<string>('Burgers');
     const addItemToOrder = (item: newItem) => {
         switch (item.type) {
             case 'drink':
@@ -84,7 +84,7 @@ const App = () => {
                 <Switch>
                     <Route path="/mainpage">
                         <>
-                            <MainPage addItemToOrder={addItemToOrder} />
+                            <MainPage addItemToOrder={addItemToOrder}  setCategory={setCategory} category={category}/>
                         </>
                     </Route>
                     <Route path="/menuselection">
