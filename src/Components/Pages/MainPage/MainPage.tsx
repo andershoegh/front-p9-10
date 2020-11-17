@@ -13,13 +13,14 @@ export interface MainPageProps {
     category: string;
     setSelectedBurger: CallableFunction;
 }
-interface ProductsKeys {
+interface ProductKeys {
     Burgers: MenuItem[]
     Desserts: MenuItem[]
     Sides: MenuItem[]
     Drinks: MenuItem[]
 }
 const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
+    const { addItemToOrder, setCategory, category, setSelectedBurger } = props;
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedItem, setSelectedItem] = useState<MenuItem>(Products.Burgers[0]);
     type categories = 'Burgers' | 'Drinks' | 'Sides' | 'Desserts';
@@ -43,13 +44,13 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
     return ( 
         <div>
             <div className="category-wrapper">
-                <CategoryBar setCategory={props.setCategory} category={props.category}/>
+                <CategoryBar setCategory={setCategory} category={category}/>
             </div>
             <ItemGrid 
                 toggleModal={toggleModal} 
                 addItemToOrder={addItemToOrder}
-                category={props.category} 
-                items={Products[props.category as keyof ProductKeys]} />
+                category={category} 
+                items={Products[category as keyof ProductKeys]} />
             <OrderSelectionModal 
               showModal={showModal} 
               toggleModal={toggleModal}

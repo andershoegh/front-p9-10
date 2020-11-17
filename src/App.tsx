@@ -33,7 +33,7 @@ export type Order = {
 const App = () => {
     const [order, setOrder] = useState<Order>({ menuItems: [], menus: [] });
     const [category, setCategory] = useState<string>('Burgers');
-    const [selectedBurger, setSelectedBurger] = useState<menuItem>(burgers[0])
+    const [selectedBurger, setSelectedBurger] = useState<MenuItem>(DummyOrder.burgers[0])
 
     console.log(order)
 
@@ -60,7 +60,7 @@ const App = () => {
                         </>
                     </Route>
                     <Route path="/menuselection">
-                        <MenuSelection selectedItem={selectedBurger} addItemToOrder={addItemToOrder} />
+                        <MenuSelection selectedItem={selectedBurger} addItemToOrder={addMenuToOrder} />
                     </Route>
                     <Route path="/orderoverview">
                         <OrderOverviewPage order={order} />

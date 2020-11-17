@@ -16,6 +16,7 @@ const CategoryBar: React.FC<CategoryBarProps> = (props: CategoryBarProps) => (
                             return (
                                 <ItemCard
                                     key={index}
+                                    scale={150}
                                     className={item.name === props.category ? 'current-category': ''}
                                     type={'category'}
                                     name={item.name}

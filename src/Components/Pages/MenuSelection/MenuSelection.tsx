@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './MenuSelection.scss'
-import { menuItem, Menu } from '../../../App'
+import { MenuItem, Menu } from '../../../App'
 import ItemGrid from '../../ItemGrid/ItemGrid'
 import ItemCard from '../../ItemCard/ItemCard'
 import { Sides, Drinks } from '../../../Utils/ProductItems'
 
 interface MenuSelectionProps {
-  selectedItem: menuItem;
+  selectedItem: MenuItem;
   addItemToOrder: CallableFunction;
 }
 
 const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
   const { selectedItem, addItemToOrder } = props;
-  const [selectedDrink, setSelectedDrink] = useState<menuItem>();
-  const [selectedSide, setselectedSide] = useState<menuItem>();
+  const [selectedDrink, setSelectedDrink] = useState<MenuItem>();
+  const [selectedSide, setselectedSide] = useState<MenuItem>();
 
   const addMenuToOrder = () => {
     if(selectedDrink && selectedSide) {
