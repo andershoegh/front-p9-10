@@ -10,14 +10,14 @@ export const Categories: Category[] = [
         imgSrc: 'cocaCola.jpg',
     },
     {
-        name: 'Burgers',
-        type: 'burger',
-        imgSrc: 'mcTower.jpg',
-    },
-    {
         name: 'Sides',
         type: 'side',
         imgSrc: 'frenchFries.jpg',
+    },
+    {
+        name: 'Burgers',
+        type: 'burger',
+        imgSrc: 'mcTower.jpg',
     },
     {
         name: 'Desserts',

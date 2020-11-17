@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useMemo, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import ItemCard from '../ItemCard'
 import './Carousel.scss'
 import { Categories } from '../../Utils/Categories'
@@ -9,33 +9,66 @@ export interface CarouselProps {
 }
 
 const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
-    const [displayArray, setDisplayArray] = useState(
-        Math.round(Categories.length / 2)
-    )
+
     const [counter, setCounter] = useState<number>(
-        Math.round(Categories.length / 2)
+        Math.round(Categories.length)+2
     )
     const carouselSlide = useRef<HTMLDivElement>(null)
-    React.useEffect(() => {
+    useEffect(() => {
         const allCards: NodeListOf<HTMLDivElement> = document.querySelectorAll(
             '.card'
         )
         const size = allCards[0].offsetHeight
         if (carouselSlide.current) {
-            console.log(
-                carouselSlide.current,
-                size,
-                -Categories.length * size,
-                allCards[0]
-            )
-            carouselSlide.current.style.transform =
-                'translateY(' + -Categories.length * (size + 40) + 'px)'
+            carouselSlide.current.style.transform = 'translateY(' + -(size + 40) * (counter-2) + 'px)';
+
+            carouselSlide.current.style.transition = '.5s';
+            // carouselSlide.current.classList.remove('no-trans');
             //Increment en med trans
+            
             styleCarousel(counter, allCards)
             onTransitionEnd(counter, carouselSlide.current)
             styleCarousel(counter, allCards)
         }
-    }, [counter, carouselSlide])
+    }, [counter, carouselSlide]);
+
+    // const onEndTransition = React.useMemo(()=>{
+    //     if(carouselSlide.current){
+    //         carouselSlide.current.style.transition = 'none';
+    //     }
+    //     const classList = carouselSlide.current?.children[oldCount].classList;
+    //     if(classList !== undefined && classList.contains('clone') && carouselSlide.current){
+    //         return oldCount += classList.contains('last-clone') ? Categories.length : -Categories.length;
+            
+    //     }else{
+    //         return oldCount;
+    //     }          
+      
+    // }, [counter])
+
+    useEffect(()=>{
+        const onTransEnd = (e: Event) =>{
+            if(e.target === carouselSlide.current){ 
+                if(carouselSlide.current){
+                    carouselSlide.current.style.transition = 'none';
+                }
+                const classList = carouselSlide.current?.children[counter].classList;
+                if(classList !== undefined && classList.contains('clone') && carouselSlide.current){
+                    const newCount = classList.contains('last-clone') ? counter + Categories.length : counter - Categories.length;
+                    setCounter(newCount);
+                }
+            }
+        };
+        if(carouselSlide.current){
+            carouselSlide.current.addEventListener('transitionend', onTransEnd);
+        }
+        return ()=>{
+            if(carouselSlide.current){
+                carouselSlide.current.removeEventListener('transitionend', onTransEnd);
+            }
+        }
+    }, [carouselSlide, counter]);
+
     const onTransitionEnd = (index: number, el: HTMLDivElement) => {
         //sæt tilbage uden trans
     }
@@ -47,25 +80,28 @@ const Carousel: React.FC<CarouselProps> = (props: CarouselProps) => {
     }
     return (
         <div
-            className="carousel-slide"
+            className="carousel-slide no-trans"
             ref={carouselSlide}
             style={{ flexDirection: props.horizontal ? 'row' : 'column' }}
         >
             {Categories.length && (
                 <>
-                    {['last-clone', '', 'first-clone'].map((cloneString) =>
-                        Categories.map((item, index) => {
+                    {['last-clone clone', '', 'first-clone clone'].map((cloneString: string, i: number) =>{
+                        
+                        return Categories.map((item, y) => {
+                            const itemIndex = y + i*(Categories.length);
                             return (
                                 <ItemCard
-                                    key={index + cloneString}
+                                    key={y + cloneString}
                                     className={cloneString}
                                     type={'category'}
                                     name={item.name}
                                     imgSrc={item.imgSrc}
+                                    onClick={()=>{setCounter(itemIndex)}}
                                 />
                             )
                         })
-                    )}
+                    })}
                 </>
             )}
         </div>

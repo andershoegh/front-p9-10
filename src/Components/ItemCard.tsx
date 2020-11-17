@@ -9,6 +9,7 @@ export interface ItemCardProps {
     toggleModal?: CallableFunction
     orderSelection?: CallableFunction
     className?: string
+    onClick?: ()=> void 
 }
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
@@ -26,7 +27,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     switch (type) {
         case 'category':
             return (
-                <div className={'card ' + className}>
+                <div className={'card ' + className} onClick={props.onClick ? props.onClick : ()=>{}}>
                     <img src={route} alt=""></img>
                     <div className="text-container-centered">
                         <span className="category-span">

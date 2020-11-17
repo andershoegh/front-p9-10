@@ -1,9 +1,13 @@
 .carousel-wrapper {
     float: left;
     width: auto;
-    height: 60vh;
+    height: 100vh;
     overflow: hidden;
 }
 .carousel-slide {
     display: flex;
+    transition: transform 0.5s;
+}
+.carousel-slide.no-trans{
+    transition:  none !important;
 }
