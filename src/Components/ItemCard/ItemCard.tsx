@@ -1,74 +1,70 @@
 import React from 'react'
-import { MenuItem } from '../../App'
 import './ItemCard.scss'
+import { MenuItem } from '../../App'
 
 export interface ItemCardProps {
-    type: string
-    name: string
-    imgSrc: string
-    price?: number
-    toggleModal?: CallableFunction
-    orderSelection?: CallableFunction
-    className?: string
-    onClick?: () => void,
-    addItemToOrder?: CallableFunction
-    item?: MenuItem
+  type: string;
+  scale: number;
+  name: string;
+  imgSrc: string;
+  price?: number;
+  item?: MenuItem;
+  toggleModal?: CallableFunction;
+  addItemToOrder?: CallableFunction;
+  orderSelection?: CallableFunction;
+  setSelectedItem?: CallableFunction;
+  onClick?: () => void;
+  className?: string;
 }
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-    const {
-        type,
-        name,
-        imgSrc,
-        price,
-        toggleModal,
-        orderSelection,
-        className,
-    } = props
-    const route = './products/' + imgSrc
+  const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem, className, onClick} = props;
+  const layout = type !== 'item' ? 'text-container' : 'text-container-centered';
+  const route = './products/' + imgSrc;
 
+  const divScale = {
+    width: scale,
+    height: scale
+  }
+
+  const onClickAction = () => {
     switch (type) {
-        case 'category':
-            return (
-                <div className={'card ' + className} onClick={props.onClick ? props.onClick : ()=>{}}>
-                    <img src={route} alt=""></img>
-                    <div className="text-container-centered">
-                        <span className="category-span">
-                            {name.toUpperCase()}
-                        </span>
-                    </div>
-                </div>
-            )
-        case 'item':
-            if (toggleModal) {
-                return (
-                    <div className="card" onClick={() => toggleModal(true)}>
-                        <img src={route} alt=""></img>
-                        <div className="text-container-centered">
-                            <span>{name.toUpperCase()}</span>
-                            {price ? <span>{price}DKK</span> : null}
-                        </div>
-                    </div>
-                )
-            }
-            break
-        case 'order selection':
-            if (orderSelection) {
-                return (
-                    <div className="card" onClick={() => orderSelection(name)}>
-                        <img src={route} alt=""></img>
-                        <div className="text-container">
-                            <span>{name.toUpperCase()}</span>
-                        </div>
-                    </div>
-                )
-            }
-            break
-        default:
-            return <></>
+      case 'category':
+        if(onClick) {
+            onClick();
+        }
+        break;
+      case 'item':
+        if(toggleModal && item?.type === 'burger') {
+          toggleModal(true, item);
+        } else if(addItemToOrder && item) {
+          addItemToOrder(item);
+        } else if(setSelectedItem && item) {
+          setSelectedItem(item);
+        }
+        break;
+      case 'order selection':
+        if(orderSelection) {
+          orderSelection(name);
+        }
     }
+  }
 
-    return <></>
+  return (
+    <div 
+      className={className + ' card'}
+      style={divScale}
+      onClick={() => onClickAction()}>
+        <img src={route} alt=''></img>
+        <div className={layout}>
+          <span>{name.toUpperCase()}</span>
+          { price 
+            ? <span>{price}DKK</span>
+            : null
+          }
+        </div>
+    </div>
+  )
 }
 
 export default ItemCard

@@ -5,6 +5,7 @@ import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
 import MainPage from './Components/Pages/MainPage/MainPage'
 import WelcomePage from './Components/Pages/WelcomePage/WelcomePage'
 import OrderOverviewPage from './Components/Pages/OrderOverviewPage'
+import MenuSelection from './Components/Pages/MenuSelection/MenuSelection'
 import advertisement from './Resources/Images/advertisement.svg'
 import { DummyOrder } from './Utils/Order'
 
@@ -32,6 +33,7 @@ export type Order = {
 const App = () => {
     const [order, setOrder] = useState<Order>({ menuItems: [], menus: [] });
     const [category, setCategory] = useState<string>('Burgers');
+    const [selectedBurger, setSelectedBurger] = useState<menuItem>(burgers[0])
 
     console.log(order)
 
@@ -54,11 +56,11 @@ const App = () => {
                 <Switch>
                     <Route path="/mainpage">
                         <>
-                            <MainPage addItemToOrder={addSingleItemToOrder}  setCategory={setCategory} category={category}/>
+                            <MainPage addItemToOrder={addSingleItemToOrder}  setCategory={setCategory} category={category} setSelectedBurger={setSelectedBurger} />
                         </>
                     </Route>
                     <Route path="/menuselection">
-                        <></>
+                        <MenuSelection selectedItem={selectedBurger} addItemToOrder={addItemToOrder} />
                     </Route>
                     <Route path="/orderoverview">
                         <OrderOverviewPage order={order} />

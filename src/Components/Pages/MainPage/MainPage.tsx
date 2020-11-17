@@ -11,7 +11,7 @@ export interface MainPageProps {
     addItemToOrder: (item: MenuItem) => void;
     setCategory: (category: string) => void;
     category: string;
-
+    setSelectedBurger: CallableFunction;
 }
 interface ProductsKeys {
     Burgers: MenuItem[]
@@ -25,14 +25,18 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
     type categories = 'Burgers' | 'Drinks' | 'Sides' | 'Desserts';
     const [selectedCategory, setSelectedCategory] = useState<categories>('Burgers');
 
-    const toggleModal = (toggle: boolean, item: MenuItem) => {
+    const toggleModal = (toggle: boolean, item?: MenuItem) => {
         setShowModal(toggle);
-        setSelectedItem(item);
+        if(item) {
+          setSelectedItem(item);
+        }
     }
 
     const handleMenu = (isMenu: boolean) => {
       if(!isMenu) {
-        props.addItemToOrder(selectedItem as unknown as MenuItem);
+        addItemToOrder(selectedItem);
+      } else {
+        setSelectedBurger(selectedItem);
       }
     }
     
@@ -43,10 +47,14 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
             </div>
             <ItemGrid 
                 toggleModal={toggleModal} 
-                addItemToOrder={props.addItemToOrder}
+                addItemToOrder={addItemToOrder}
                 category={props.category} 
-                items={Products[props.category as keyof ProductsKeys]} />
-            <OrderSelectionModal showModal={showModal} toggleModal={toggleModal} handleMenu={handleMenu} />
+                items={Products[props.category as keyof ProductKeys]} />
+            <OrderSelectionModal 
+              showModal={showModal} 
+              toggleModal={toggleModal}
+              handleMenu={handleMenu} 
+            />
         </div>
      );
 }

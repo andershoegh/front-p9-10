@@ -20,6 +20,7 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
           <div key={key}>
             <ItemCard 
               type='item' 
+              scale={250}
               name={item.name} 
               imgSrc={item.imgSrc} 
               price={item.price}

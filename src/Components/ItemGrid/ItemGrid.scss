@@ -1,17 +1,19 @@
 .grid-container {
-    width: 80vw;
-    height: 80vh;
+    width: 75vw;
+    height: 60vh;
     float: right;
     display: flex;
     flex-flow: column wrap;
     overflow: scroll;
     
-    
-
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 
     &::-webkit-scrollbar {
         display: none;
+    }
+
+    div {
+      margin: 5px 20px;
     }
 }
