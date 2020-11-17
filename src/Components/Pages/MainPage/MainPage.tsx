@@ -4,10 +4,14 @@ import * as Products from '../../../Utils/ProductItems'
 import OrderDetails from '../../BottomOrderDetails/OrderDetails';
 import ItemGrid from '../../ItemGrid/ItemGrid'
 import OrderSelectionModal from '../../OrderSelectionModal/OrderSelectionModal'
+import CategoryBar from '../../CategoryBar/CategoryBar';
 
 
 export interface MainPageProps {
     addItemToOrder: (item: newItem) => void;
+    setCategory: (category: string) => void;
+    category: string;
+
 }
  
 const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
@@ -29,11 +33,9 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
     
     return ( 
         <div>
-            {/* <button onClick={()=>props.addItemToOrder(Burgers[1])}>Test</button> */}
-            <button onClick={() => setSelectedCategory('Burgers')}>Burgers</button>
-            <button onClick={() => setSelectedCategory('Drinks')}>Drinks</button>
-            <button onClick={() => setSelectedCategory('Desserts')}>Desserts</button>
-            <button onClick={() => setSelectedCategory('Sides')}>Sides</button>
+            <div className="category-wrapper">
+                <CategoryBar setCategory={props.setCategory} category={props.category}/>
+            </div>
             <ItemGrid 
                 toggleModal={toggleModal} 
                 addItemToOrder={props.addItemToOrder}

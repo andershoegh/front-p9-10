@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
@@ -6,7 +6,7 @@ import MainPage from './Components/Pages/MainPage/MainPage'
 import WelcomePage from './Components/Pages/WelcomePage/WelcomePage'
 import OrderOverviewPage from './Components/Pages/OrderOverviewPage'
 import advertisement from './Resources/Images/advertisement.svg'
-import { DummyOrder } from './Utils/Order';
+import { DummyOrder } from './Utils/Order'
 
 export type Drink = {
     name: string
@@ -70,7 +70,6 @@ const App = () => {
     const addSingleItemToOrder = (item: MenuItem) => {
         setOrder({ ...order, MenuItems: [...order.MenuItems, item] })
     }
-    
 
     const addMenuToOrder = (menu: Menu) => {
         setOrder({ ...order, Menus: [...order.Menus, menu] })
@@ -85,9 +84,9 @@ const App = () => {
                     alt="Advertisement of corn dog"
                 />
                 <Switch>
-                    <Route path="/mainpage" >
+                    <Route path="/mainpage">
                         <>
-                            <MainPage addItemToOrder={addItemToOrder} />
+                            <MainPage addItemToOrder={addItemToOrder}  setCategory={setCategory} category={category}/>
                         </>
                     </Route>
                     <Route path="/menuselection">
@@ -98,12 +97,18 @@ const App = () => {
                     </Route>
                     <Route path="/">
                         <WelcomePage />
-                    </Route>   
+                    </Route>
                 </Switch>
                 <Route path="/(mainpage|menuselection|orderoverview)">
-                    <OrderDetails drinks={drinks} burgers={burgers} sides={sides} menus={menus} desserts={desserts} />     
+                    <OrderDetails
+                        drinks={drinks}
+                        burgers={burgers}
+                        sides={sides}
+                        menus={menus}
+                        desserts={desserts}
+                    />
                 </Route>
-            </div>   
+            </div>
         </Router>
        
     )
