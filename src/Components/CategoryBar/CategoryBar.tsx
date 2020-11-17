@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ItemCard from '../ItemCard'
+import ItemCard from '../ItemCard/ItemCard'
 import './CategoryBar.scss'
 import { Categories } from '../../Utils/Categories'
 

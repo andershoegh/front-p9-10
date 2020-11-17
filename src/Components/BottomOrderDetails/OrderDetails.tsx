@@ -1,54 +1,50 @@
 import React, { useMemo } from 'react'
 import './OrderDetails.scss'
+import { MenuItem, Menu, Order } from '../../App';
+// export type MenuItem = {
+//     type: 'burger' | 'drink' | 'side' | 'dessert' | 'menu'
+//     name: string
+//     imgSrc: string
+//     price: number
+// }
 
-type MenuItem = {
-    name: string
-    imgSrc: string
-    price: number
-    type: string
-}
-type Menu = {
-    burger: MenuItem
-    drink: MenuItem
-    side: MenuItem
-    type: 'menu'
-}
+// export type Menu = {
+//     type: 'menu'
+//     burger: MenuItem
+//     drink: MenuItem
+//     side: MenuItem
+// }
+
+// export type Order = {
+//     MenuItems: MenuItem[]
+//     Menus: Menu[]
+// }
+
+
 
 export interface OrderDetailsProps {
-    drinks: MenuItem[]
-    burgers: MenuItem[]
-    sides: MenuItem[]
-    menus: Menu[]
-    desserts: MenuItem[]
+   order: Order
 }
 
 const OrderDetails: React.FC<OrderDetailsProps> = (
     props: OrderDetailsProps
 ) => {
-    const { drinks, burgers, sides, menus, desserts } = props
+    const { menus, menuItems } = props.order;
 
     const getItemsPrice = (items: MenuItem[]) =>
         items.reduce((total: number, item: MenuItem) => total + item.price, 0)
     const getMenusPrice = (menus: Menu[]) => {
        return  menus.reduce((total: number, menu: Menu) => total + menu.burger.price + menu.drink.price + menu.side.price, 0);
     } 
+    const reduceMenuAndItemsAmount = (total: number, item: MenuItem|Menu) =>{
+        return total + (item.amount? item.amount : 1);
+    };
    
     const menuItemsCost: number = useMemo(()=> {
-        return getItemsPrice(drinks) + getItemsPrice(burgers) + getItemsPrice(sides) + getItemsPrice(desserts);
-    }, [drinks, burgers, sides, desserts]);
+        return getItemsPrice(menuItems);
+    }, [menuItems]);
     
     const menusCost =  useMemo(()=> getMenusPrice(menus), [menus]);
-
-    const menuItemsCost: number = useMemo(() => {
-        return (
-            getItemsPrice(drinks) +
-            getItemsPrice(burgers) +
-            getItemsPrice(sides) +
-            getItemsPrice(desserts)
-        )
-    }, [drinks, burgers, sides])
-
-    const menusCost = useMemo(() => getMenusPrice(menus), [menus])
 
     const vat = useMemo(() => {
         const price: number = menuItemsCost + menusCost
@@ -56,13 +52,12 @@ const OrderDetails: React.FC<OrderDetailsProps> = (
     }, [menusCost, menuItemsCost])
 
     const getItemsAmount = useMemo(() => {
-        const propKeys: string[] = Object.keys(props)
-        return propKeys.reduce(
-            (total: number, key: string) =>
-                total + props[key as keyof OrderDetailsProps].length,
-            0
-        )
-    }, [props])
+        const propKeys: string[] = Object.keys(props.order);
+
+        
+        
+        return menus.reduce(reduceMenuAndItemsAmount, 0) + menuItems.reduce(reduceMenuAndItemsAmount, 0);
+    }, [menus, menuItems]);
 
     return (
         <div className="order-details-wrapper">

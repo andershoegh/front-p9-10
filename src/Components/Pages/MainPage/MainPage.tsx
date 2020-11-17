@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import  { newItem, menuItem }  from '../../../App';
+import  {  MenuItem }  from '../../../App';
 import * as Products from '../../../Utils/ProductItems'
 import OrderDetails from '../../BottomOrderDetails/OrderDetails';
 import ItemGrid from '../../ItemGrid/ItemGrid'
@@ -8,26 +8,31 @@ import CategoryBar from '../../CategoryBar/CategoryBar';
 
 
 export interface MainPageProps {
-    addItemToOrder: (item: newItem) => void;
+    addItemToOrder: (item: MenuItem) => void;
     setCategory: (category: string) => void;
     category: string;
 
 }
- 
+interface ProductsKeys {
+    Burgers: MenuItem[]
+    Desserts: MenuItem[]
+    Sides: MenuItem[]
+    Drinks: MenuItem[]
+}
 const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [selectedItem, setSelectedItem] = useState<menuItem>(Products.Burgers[0]);
+    const [selectedItem, setSelectedItem] = useState<MenuItem>(Products.Burgers[0]);
     type categories = 'Burgers' | 'Drinks' | 'Sides' | 'Desserts';
     const [selectedCategory, setSelectedCategory] = useState<categories>('Burgers');
 
-    const toggleModal = (toggle: boolean, item: menuItem) => {
+    const toggleModal = (toggle: boolean, item: MenuItem) => {
         setShowModal(toggle);
         setSelectedItem(item);
     }
 
     const handleMenu = (isMenu: boolean) => {
       if(!isMenu) {
-        props.addItemToOrder(selectedItem as unknown as newItem);
+        props.addItemToOrder(selectedItem as unknown as MenuItem);
       }
     }
     
@@ -39,7 +44,8 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
             <ItemGrid 
                 toggleModal={toggleModal} 
                 addItemToOrder={props.addItemToOrder}
-                category='Burgers' items={Products[selectedCategory]} />
+                category={props.category} 
+                items={Products[props.category as keyof ProductsKeys]} />
             <OrderSelectionModal showModal={showModal} toggleModal={toggleModal} handleMenu={handleMenu} />
         </div>
      );

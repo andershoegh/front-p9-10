@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { MenuItem } from '../../App';
 import ItemCard from '../ItemCard/ItemCard'
 import './ItemGrid.scss'
 
@@ -6,7 +7,7 @@ export interface ItemGridProps {
   toggleModal?: CallableFunction;
   addItemToOrder?: CallableFunction;
   category: string;
-  items: Array<{}>;
+  items: Array<MenuItem>;
 }
 
 const ItemGrid: React.FC<ItemGridProps> = (props) => {

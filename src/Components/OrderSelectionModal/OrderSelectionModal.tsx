@@ -1,6 +1,6 @@
 import React from 'react'
 import './OrderSelectionModal.scss'
-import ItemCard from '../ItemCard'
+import ItemCard from '../ItemCard/ItemCard'
 
 export interface OrderSelectionModalInterface {
   showModal: boolean

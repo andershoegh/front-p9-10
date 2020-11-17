@@ -22,8 +22,8 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order }) => {
     return (
         <div>
             <div className="headline">MENU</div>
-            {order.Menus &&
-                order.Menus.map((menu) => {
+            {order.menus &&
+                order.menus.map((menu) => {
                     return (
                         <div className="menuDisplay">
                             <div className="menuCard">
@@ -46,9 +46,9 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order }) => {
                     )
                 })}
             <div className="headline">SINGLE ITEMS</div>
-            {order.MenuItems && (
+            {order.menuItems && (
                 <div className="singleItems">
-                    {order.MenuItems.map((menuItem) => {
+                    {order.menuItems.map((menuItem) => {
                         return (
                             <div
                                 key={menuItem.name}

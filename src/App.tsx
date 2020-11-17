@@ -8,45 +8,12 @@ import OrderOverviewPage from './Components/Pages/OrderOverviewPage'
 import advertisement from './Resources/Images/advertisement.svg'
 import { DummyOrder } from './Utils/Order'
 
-export type Drink = {
-    name: string
-    imgSrc: string
-    price: number
-    type: 'drink'
-    amount: number
-}
-export type Burger = {
-    name: string
-    imgSrc: string
-    price: number
-    type: 'burger'
-    amount: number
-}
-export type Side = {
-    name: string
-    imgSrc: string
-    price: number
-    type: 'side'
-    amount: number
-}
-
-export type Dessert = {
-    name: string
-    imgSrc: string
-    price: number
-    type: 'dessert'
-    amount: number
-}
-
-export type newItem = {
-    type: 'burger' | 'drink' | 'menu' | 'side' | 'dessert'
-}
-
 export type MenuItem = {
     type: 'burger' | 'drink' | 'side' | 'dessert' | 'menu'
     name: string
     imgSrc: string
     price: number
+    amount?: number
 }
 
 export type Menu = {
@@ -54,25 +21,26 @@ export type Menu = {
     burger: MenuItem
     drink: MenuItem
     side: MenuItem
+    amount?: number
 }
 
 export type Order = {
-    MenuItems: MenuItem[]
-    Menus: Menu[]
+    menuItems: MenuItem[]
+    menus: Menu[]
 }
-export type Products = 'Burgers' | 'Drinks' | 'Menus' | 'Sides' | 'Desserts';
 
 const App = () => {
-    const [order, setOrder] = useState<Order>({ MenuItems: [], Menus: [] })
+    const [order, setOrder] = useState<Order>({ menuItems: [], menus: [] });
+    const [category, setCategory] = useState<string>('Burgers');
 
     console.log(order)
 
     const addSingleItemToOrder = (item: MenuItem) => {
-        setOrder({ ...order, MenuItems: [...order.MenuItems, item] })
+        setOrder({ ...order, menuItems: [...order.menuItems, item] })
     }
 
     const addMenuToOrder = (menu: Menu) => {
-        setOrder({ ...order, Menus: [...order.Menus, menu] })
+        setOrder({ ...order, menus: [...order.menus, menu] })
     }
 
     return (
@@ -86,7 +54,7 @@ const App = () => {
                 <Switch>
                     <Route path="/mainpage">
                         <>
-                            <MainPage addItemToOrder={addItemToOrder}  setCategory={setCategory} category={category}/>
+                            <MainPage addItemToOrder={addSingleItemToOrder}  setCategory={setCategory} category={category}/>
                         </>
                     </Route>
                     <Route path="/menuselection">
@@ -101,11 +69,7 @@ const App = () => {
                 </Switch>
                 <Route path="/(mainpage|menuselection|orderoverview)">
                     <OrderDetails
-                        drinks={drinks}
-                        burgers={burgers}
-                        sides={sides}
-                        menus={menus}
-                        desserts={desserts}
+                        order={order}
                     />
                 </Route>
             </div>
