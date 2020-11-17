@@ -27,13 +27,6 @@ export type Side = {
     type: 'side'
     amount: number
 }
-export type Menu = {
-    side: Side
-    burger: Burger
-    drink: Drink
-    type: 'menu'
-    amount: number
-}
 
 export type Dessert = {
     name: string
@@ -47,35 +40,36 @@ export type newItem = {
     type: 'burger' | 'drink' | 'menu' | 'side' | 'dessert'
 }
 
-const App = () => {
-    const [drinks, setDrinks] = useState<Drink[]>([...DummyOrder.drinks])
-    const [burgers, setBurgers] = useState<Burger[]>([...DummyOrder.burgers])
-    const [sides, setSides] = useState<Side[]>([...DummyOrder.sides])
-    const [menus, setMenus] = useState<Menu[]>([...DummyOrder.menus])
-    const [desserts, setDesserts] = useState<Dessert[]>([
-        ...DummyOrder.desserts,
-    ])
+export type MenuItem = {
+    type: 'burger' | 'drink' | 'side' | 'dessert' | 'menu'
+    name: string
+    imgSrc: string
+    price: number
+}
 
-    const addItemToOrder = (item: newItem) => {
-        switch (item.type) {
-            case 'drink':
-                setDrinks([...drinks, item as Drink])
-                break
-            case 'burger':
-                setBurgers([...burgers, item as Burger])
-                break
-            case 'side':
-                setSides([...sides, item as Side])
-                break
-            case 'menu':
-                setMenus([...menus, item as Menu])
-                break
-            case 'dessert':
-                setDesserts([...desserts, item as Dessert])
-                break
-            default:
-                console.log('Error adding item!')
-        }
+export type Menu = {
+    type: 'menu'
+    burger: MenuItem
+    drink: MenuItem
+    side: MenuItem
+}
+
+export type Order = {
+    MenuItems: MenuItem[]
+    Menus: Menu[]
+}
+
+const App = () => {
+    const [order, setOrder] = useState<Order>({ MenuItems: [], Menus: [] })
+
+    console.log(order)
+
+    const addSingleItemToOrder = (item: MenuItem) => {
+        setOrder({ ...order, MenuItems: [...order.MenuItems, item] })
+    }
+
+    const addMenuToOrder = (menu: Menu) => {
+        setOrder({ ...order, Menus: [...order.Menus, menu] })
     }
 
     return (
@@ -95,13 +89,7 @@ const App = () => {
                     <></>
                 </Route>
                 <Route path="/orderoverview">
-                    <OrderOverviewPage
-                        desserts={desserts}
-                        menus={menus}
-                        drinks={drinks}
-                        burgers={burgers}
-                        sides={sides}
-                    />
+                    <OrderOverviewPage order={order} />
                 </Route>
                 <Route path="/" component={WelcomePage} />
             </Switch>
