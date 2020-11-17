@@ -38,9 +38,17 @@ type Menu = {
     type: 'menu'
 }
 
+export type menuItem = {
+    name: string;
+    imgSrc: string;
+    price: number;
+    type: string;
+  }
+
 export type newItem = {
     type: 'burger' | 'drink' | 'menu' | 'side' | 'dessert'
 }
+export type Products = 'Burgers' | 'Drinks' | 'Menus' | 'Sides' | 'Desserts';
 
 const App = () => {
     const [drinks, setDrinks] = useState<Drink[]>([...DummyOrder.drinks])

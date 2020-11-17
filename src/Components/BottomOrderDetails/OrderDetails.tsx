@@ -33,7 +33,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = (props: OrderDetailsProps) => 
    
     const menuItemsCost: number = useMemo(()=> {
         return getItemsPrice(drinks) + getItemsPrice(burgers) + getItemsPrice(sides) + getItemsPrice(desserts);
-    }, [drinks, burgers, sides]);
+    }, [drinks, burgers, sides, desserts]);
     
     const menusCost =  useMemo(()=> getMenusPrice(menus), [menus]);
 
