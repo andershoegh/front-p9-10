@@ -5,7 +5,7 @@ export const Burgers = [
         price: 20,
         type: 'burger' as const
     },
-    { 
+    {
         name: 'Cheeseburger',
         imgSrc: 'cheeseburger.jpg',
         price: 25,
@@ -53,52 +53,52 @@ export const Burgers = [
         price: 55,
         type: 'burger' as const
     },
-];
+]
 
 export const Drinks = [
-    {   
+    {
         name: 'Coca Cola',
         imgSrc: 'cocaCola.jpg',
         price: 20,
         type: 'drink' as const
     },
-    {   
+    {
         name: 'Coca Cola Zero',
         imgSrc: 'cocaColaZero.jpg',
         price: 20,
         type: 'drink' as const
     },
-    {   
+    {
         name: 'Fanta Peach Apricot',
         imgSrc: 'fantaPeachApricot.jpg',
         price: 20,
         type: 'drink' as const
     },
-    {   
+    {
         name: 'Fanta Exotic',
         imgSrc: 'fantaExotic.jpg',
         price: 20,
         type: 'drink' as const
     },
-    {   
+    {
         name: 'Carlsberg Sport',
         imgSrc: 'sport.jpg',
         price: 20,
         type: 'drink' as const
     },
-    {   
+    {
         name: 'Schweppes',
         imgSrc: 'schweppes.jpg',
         price: 20,
         type: 'drink' as const
     },
-    {   
+    {
         name: 'Squash',
         imgSrc: 'squash.jpg',
         price: 20,
         type: 'drink' as const
     },
-    {   
+    {
         name: 'Fuzetea',
         imgSrc: 'iceTea.jpg',
         price: 20,
@@ -149,7 +149,7 @@ export const Desserts = [
         price: 15,
         type: 'dessert' as const
     },
-];
+]
 
 export const Sides = [
     {

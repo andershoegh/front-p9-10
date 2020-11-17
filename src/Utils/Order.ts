@@ -1,20 +1,20 @@
-import {Burgers, Drinks, Desserts, Sides} from './ProductItems';
+import { Burgers, Drinks, Desserts, Sides } from './ProductItems'
 
 export const DummyOrder = {
-    burgers:[
+    burgers: [
         {
             ...Burgers[0],
         }
     ],
-    menus:[
+    menus: [
         {
             burger: Burgers[3],
-            drink:  Drinks[0],
+            drink: Drinks[0],
             side: Sides[0],
             type: 'menu' as const
         }
     ],
-    sides:[
+    sides: [
         {
             ...Sides[4],
         }

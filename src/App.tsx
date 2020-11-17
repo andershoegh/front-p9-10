@@ -4,82 +4,77 @@ import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
 import MainPage from './Components/Pages/MainPage/MainPage'
 import WelcomePage from './Components/Pages/WelcomePage/WelcomePage'
+import OrderOverviewPage from './Components/Pages/OrderOverviewPage'
 import advertisement from './Resources/Images/advertisement.svg'
 import { DummyOrder } from './Utils/Order';
 
-type Drink = {
+export type Drink = {
     name: string
     imgSrc: string
     price: number
     type: 'drink'
+    amount: number
 }
-type Burger = {
+export type Burger = {
     name: string
     imgSrc: string
     price: number
     type: 'burger'
+    amount: number
 }
-type Side = {
+export type Side = {
     name: string
     imgSrc: string
     price: number
     type: 'side'
+    amount: number
 }
-type Dessert = {
+
+export type Dessert = {
     name: string
     imgSrc: string
     price: number
     type: 'dessert'
+    amount: number
 }
-type Menu = {
-    side: Side
-    burger: Burger
-    drink: Drink
-    type: 'menu'
-}
-
-export type menuItem = {
-    name: string;
-    imgSrc: string;
-    price: number;
-    type: string;
-  }
 
 export type newItem = {
     type: 'burger' | 'drink' | 'menu' | 'side' | 'dessert'
 }
+
+export type MenuItem = {
+    type: 'burger' | 'drink' | 'side' | 'dessert' | 'menu'
+    name: string
+    imgSrc: string
+    price: number
+}
+
+export type Menu = {
+    type: 'menu'
+    burger: MenuItem
+    drink: MenuItem
+    side: MenuItem
+}
+
+export type Order = {
+    MenuItems: MenuItem[]
+    Menus: Menu[]
+}
 export type Products = 'Burgers' | 'Drinks' | 'Menus' | 'Sides' | 'Desserts';
 
 const App = () => {
-    const [drinks, setDrinks] = useState<Drink[]>([...DummyOrder.drinks])
-    const [burgers, setBurgers] = useState<Burger[]>([...DummyOrder.burgers])
-    const [sides, setSides] = useState<Side[]>([...DummyOrder.sides])
-    const [desserts, setDesserts] = useState<Dessert[]>([...DummyOrder.desserts])
-    const [menus, setMenus] = useState<Menu[]>([...DummyOrder.menus])
+    const [order, setOrder] = useState<Order>({ MenuItems: [], Menus: [] })
 
+    console.log(order)
 
-    const addItemToOrder = (item: newItem) => {
-        switch (item.type) {
-            case 'drink':
-                setDrinks([...drinks, item as Drink])
-                break
-            case 'burger':
-                setBurgers([...burgers, item as Burger])
-                break
-            case 'side':
-                setSides([...sides, item as Side])
-                break
-            case 'dessert':
-                setDesserts([...desserts, item as Dessert])
-                break
-            case 'menu':
-                setMenus([...menus, item as Menu])
-                break
-            default:
-                console.log('Error adding item!')
-        }
+    const addSingleItemToOrder = (item: MenuItem) => {
+        setOrder({ ...order, MenuItems: [...order.MenuItems, item] })
     }
     
+
+    const addMenuToOrder = (menu: Menu) => {
+        setOrder({ ...order, Menus: [...order.Menus, menu] })
+    }
 
     return (
         <Router>
@@ -99,7 +94,7 @@ const App = () => {
                         <></>
                     </Route>
                     <Route path="/orderoverview">
-                        <></>
+                        <OrderOverviewPage order={order} />
                     </Route>
                     <Route path="/">
                         <WelcomePage />
@@ -110,6 +105,7 @@ const App = () => {
                 </Route>
             </div>   
         </Router>
+       
     )
 }
 
