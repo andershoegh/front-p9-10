@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ItemCard from '../ItemCard'
+import ItemCard from '../ItemCard/ItemCard'
 import './ItemGrid.scss'
 
 export interface ItemGridProps {
@@ -19,6 +19,7 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
           <div key={key}>
             <ItemCard 
               type='item' 
+              scale={250}
               name={item.name} 
               imgSrc={item.imgSrc} 
               price={item.price}

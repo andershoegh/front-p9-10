@@ -4,6 +4,7 @@ import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
 import MainPage from './Components/Pages/MainPage/MainPage'
 import WelcomePage from './Components/Pages/WelcomePage/WelcomePage'
+import MenuSelection from './Components/Pages/MenuSelection/MenuSelection'
 import advertisement from './Resources/Images/advertisement.svg'
 import { DummyOrder } from './Utils/Order';
 
@@ -31,7 +32,7 @@ type Dessert = {
     price: number
     type: 'dessert'
 }
-type Menu = {
+export type Menu = {
     side: Side
     burger: Burger
     drink: Drink
@@ -56,6 +57,7 @@ const App = () => {
     const [sides, setSides] = useState<Side[]>([...DummyOrder.sides])
     const [desserts, setDesserts] = useState<Dessert[]>([...DummyOrder.desserts])
     const [menus, setMenus] = useState<Menu[]>([...DummyOrder.menus])
+    const [selectedBurger, setselectedBurger] = useState<menuItem>(burgers[0])
 
 
     const addItemToOrder = (item: newItem) => {
@@ -92,11 +94,11 @@ const App = () => {
                 <Switch>
                     <Route path="/mainpage" >
                         <>
-                            <MainPage addItemToOrder={addItemToOrder} />
+                            <MainPage addItemToOrder={addItemToOrder} setSelectedBurger={setselectedBurger} />
                         </>
                     </Route>
                     <Route path="/menuselection">
-                        <></>
+                        <MenuSelection selectedItem={selectedBurger} addItemToOrder={addItemToOrder} />
                     </Route>
                     <Route path="/orderoverview">
                         <></>

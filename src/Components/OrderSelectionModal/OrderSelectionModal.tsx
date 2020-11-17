@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './OrderSelectionModal.scss'
-import ItemCard from '../ItemCard'
+import ItemCard from '../ItemCard/ItemCard'
 
 export interface OrderSelectionModalInterface {
   showModal: boolean
@@ -37,16 +38,20 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
         <div className="selection-box">
           <ItemCard 
             type='order selection'
+            scale={200}
             name='Single' 
             imgSrc='cheeseburger.jpg' 
             orderSelection={orderSelection}
           />
-          <ItemCard 
-            type='order selection'
-            name='Menu' 
-            imgSrc='frenchFries.jpg' 
-            orderSelection={orderSelection}
-          />
+          <Link to={'menuselection'} >
+            <ItemCard 
+              type='order selection'
+              scale={200}
+              name='Menu' 
+              imgSrc='frenchFries.jpg' 
+              orderSelection={orderSelection}
+            />
+          </Link>
         </div>
         <button onClick={() => toggleModal(false)}>CANCEL</button>
       </div>

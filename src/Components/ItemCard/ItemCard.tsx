@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './ItemCard.scss'
-import { menuItem } from '../App'
+import { menuItem } from '../../App'
 
 export interface ItemCardProps {
   type: string;
+  scale: number;
   name: string;
   imgSrc: string;
   price?: number;
@@ -11,12 +12,18 @@ export interface ItemCardProps {
   toggleModal?: CallableFunction;
   addItemToOrder?: CallableFunction;
   orderSelection?: CallableFunction;
+  setSelectedItem?: CallableFunction;
 }
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-  const { type, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection } = props;
+  const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem } = props;
   const layout = type !== 'item' ? 'text-container' : 'text-container-centered';
   const route = './products/' + imgSrc;
+
+  const divScale = {
+    width: scale,
+    height: scale
+  }
 
   const onClickAction = () => {
     switch (type) {
@@ -27,6 +34,8 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
           toggleModal(true, item);
         } else if(addItemToOrder && item) {
           addItemToOrder(item);
+        } else if(setSelectedItem && item) {
+          setSelectedItem(item);
         }
         break;
       case 'order selection':
@@ -39,6 +48,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
   return (
     <div 
       className="card"
+      style={divScale}
       onClick={() => onClickAction()}>
         <img src={route} alt=''></img>
         <div className={layout}>

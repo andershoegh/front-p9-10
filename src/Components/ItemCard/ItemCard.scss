@@ -1,12 +1,10 @@
-$scale: 10;
-
 .card {
   // REMEMBER TO DELETE MARGIN
-  margin: 20px;
+  // margin: 20px;
   // REMEMBER TO DELETE MARGIN
-  width: 20px * $scale;
-  height: 20px * $scale;
-  border-radius: 8px;
+  width: var(--card-width);
+  height: var(--card-height);
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0px 8px 40px rgba(0, 0, 0, .1);
 
@@ -14,7 +12,7 @@ $scale: 10;
   flex-direction: column;
 
   font-family: 'Open Sans', sans-serif;
-  font-size: .09em * $scale;
+  font-size: .8em;
   color: rgba(0, 0, 0, .5);
   font-weight: 700;
 
