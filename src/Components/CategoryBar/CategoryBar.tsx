@@ -4,7 +4,7 @@ import './CategoryBar.scss'
 import { Categories } from '../../Utils/Categories'
 
 export interface CategoryBarProps {
-    setCategory: (category: string) => void;
+    setCategory: CallableFunction;
     category: string;
 }
 

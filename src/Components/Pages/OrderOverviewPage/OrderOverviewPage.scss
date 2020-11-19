@@ -1,3 +1,7 @@
+.order-overview{
+    height: 72vh;
+    overflow: scroll;
+}
 .headline {
     font-style: normal;
     font-weight: 300;
@@ -14,6 +18,7 @@
     flex-wrap: wrap;
     row-gap: 20px;
     margin-left: 20px;
+    margin-bottom: 50px;
 }
 
 .menuCard {
@@ -49,4 +54,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.cart-empty{
+    height: 100%;
+    width: 100%;
+    margin-top: -20px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #80808014;
+    .txt{
+        position: relative;
+        font-size: 3rem;
+        color:rgb(148, 148, 148);
+        &::before{
+            position: absolute;
+            content: ':-(';
+            top:110%;
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg);
+        }
+        &::after{
+            position: absolute;
+            content: '';
+            top: 157%;
+            left: 48.5%;
+            width: 75px;
+            height: 75px;
+            border: 2px #949494 solid;
+            border-radius: 38px;
+            transform: translate(-50%, -50%);
+        }
+    }
 }

@@ -4,17 +4,16 @@ import './Stepper.scss'
 export interface StepperProps {
     decrement: () => void
     increment: () => void
+    amount: number
 }
 
-const Stepper: React.FC<StepperProps> = ({ decrement, increment }) => {
+const Stepper: React.FC<StepperProps> = ({ decrement, increment, amount }) => {
     return (
         <div className="stepper">
-            <button onClick={decrement} className="stepperItem">
-                -
+            <button onClick={decrement} className="stepperItem minus">
             </button>
-            <div>{}</div>
-            <button onClick={increment} className="stepperItem">
-                +
+            <div className="stepperCount">{amount}</div>
+            <button onClick={increment} className="stepperItem plus">
             </button>
         </div>
     )

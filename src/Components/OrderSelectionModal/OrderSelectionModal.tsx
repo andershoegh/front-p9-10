@@ -26,6 +26,7 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
   if(modal) {
     if (showModal) {
       modal.style.display = 'block';
+
     } else {
       modal.style.display = 'none';
     }
