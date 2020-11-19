@@ -38,7 +38,7 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
         <div className="selection-box">
           <ItemCard 
             type='order selection'
-            scale={200}
+            scale={250}
             name='Single' 
             imgSrc='cheeseburger.jpg' 
             orderSelection={orderSelection}
@@ -46,7 +46,7 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
           <Link to={'menuselection'} >
             <ItemCard 
               type='order selection'
-              scale={200}
+              scale={250}
               name='Menu' 
               imgSrc='frenchFries.jpg' 
               orderSelection={orderSelection}

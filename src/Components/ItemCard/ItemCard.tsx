@@ -21,11 +21,22 @@ export interface ItemCardProps {
 const ItemCard: React.FC<ItemCardProps> = (props) => {
   const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem, selectedItem, className, onClick} = props;
   let layout = type !== 'item' ? 'text-container' : 'text-container-centered';
+  let fontSize;
   let cardStyle = className + ' card';
   const route = './products/' + imgSrc;
+
+  if(type !== 'item') {
+    layout = 'text-container';
+    fontSize = 0.8 * (scale / 120) + 'em';
+  } else {
+    layout = 'text-container-centered';
+    fontSize = 0.8 * (scale / 170) + 'em';
+  }
+
   const divScale = {
     width: scale,
-    height: scale
+    height: scale,
+    'font-size': fontSize
   }
 
   if(item && selectedItem) {

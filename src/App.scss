@@ -5,3 +5,10 @@ body{
     height: 100vh;
     overflow: hidden;
 }
+
+.hello {
+  position: absolute;
+  top: 0;
+  left: 50vw;
+  z-index: 2;
+}
