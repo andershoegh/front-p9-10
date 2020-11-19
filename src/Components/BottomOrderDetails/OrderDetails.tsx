@@ -24,6 +24,7 @@ import { MenuItem, Menu, Order } from '../../App';
 
 export interface OrderDetailsProps {
    order: Order
+   toggleModal: CallableFunction
 }
 
 const OrderDetails: React.FC<OrderDetailsProps> = (
@@ -75,7 +76,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = (
             </div>
 
             <div className="order-details-button-wrapper">
-                <button className="cancel-btn">CANCEL ORDER</button>
+                <button className="cancel-btn" onClick={() => props.toggleModal(true)} >CANCEL ORDER</button>
                 <button className="finish-btn">FINISH ORDER</button>
             </div>
         </div>
