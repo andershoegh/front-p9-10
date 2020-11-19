@@ -1,10 +1,7 @@
 .card {
-  // REMEMBER TO DELETE MARGIN
-  // margin: 20px;
-  // REMEMBER TO DELETE MARGIN
   width: var(--card-width);
   height: var(--card-height);
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 8px 40px rgba(0, 0, 0, .1);
 
@@ -47,8 +44,14 @@
 
     span {
       align-self: center;
+      margin: 0 5px;
     }
   }
+}
+
+.highlighted {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgb(68, 143, 68);
 }
 
 

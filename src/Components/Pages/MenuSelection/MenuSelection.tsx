@@ -50,6 +50,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                 price={item.price}
                 item={item}
                 setSelectedItem={setSelectedDrink}
+                selectedItem={selectedDrink}
               />
             </div>
           )
@@ -69,6 +70,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                 price={item.price}
                 item={item}
                 setSelectedItem={setselectedSide}
+                selectedItem={selectedSide}
               />
             </div>
           )

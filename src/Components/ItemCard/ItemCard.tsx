@@ -13,25 +13,34 @@ export interface ItemCardProps {
   addItemToOrder?: CallableFunction;
   orderSelection?: CallableFunction;
   setSelectedItem?: CallableFunction;
+  selectedItem?: MenuItem;
   onClick?: () => void;
   className?: string;
 }
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-  const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem, className, onClick} = props;
-  const layout = type !== 'item' ? 'text-container' : 'text-container-centered';
+  const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem, selectedItem, className, onClick} = props;
+  let layout = type !== 'item' ? 'text-container' : 'text-container-centered';
+  let cardStyle = className + ' card';
   const route = './products/' + imgSrc;
-
   const divScale = {
     width: scale,
     height: scale
+  }
+
+  if(item && selectedItem) {
+    if(item === selectedItem) {
+      cardStyle += ' highlighted'; 
+    } else {
+      cardStyle = ' card';
+    }
   }
 
   const onClickAction = () => {
     switch (type) {
       case 'category':
         if(onClick) {
-            onClick();
+          onClick();
         }
         break;
       case 'item':
@@ -52,7 +61,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
 
   return (
     <div 
-      className={className + ' card'}
+      className={cardStyle}
       style={divScale}
       onClick={() => onClickAction()}>
         <img src={route} alt=''></img>
