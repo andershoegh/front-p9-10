@@ -54,7 +54,8 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
             <OrderSelectionModal 
               showModal={showModal} 
               toggleModal={toggleModal}
-              handleMenu={handleMenu} 
+              handleMenu={handleMenu}
+              imgSrc={selectedItem.imgSrc} 
             />
         </div>
      );

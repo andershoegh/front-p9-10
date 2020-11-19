@@ -30,7 +30,11 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     fontSize = 0.8 * (scale / 120) + 'em';
   } else {
     layout = 'text-container-centered';
-    fontSize = 0.8 * (scale / 170) + 'em';
+    if (name.length > 20) {
+      fontSize = 0.8 * (scale / 280) + 'em';
+    } else {
+      fontSize = 0.8 * (scale / 200) + 'em';
+    }
   }
 
   const divScale = {

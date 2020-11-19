@@ -7,10 +7,11 @@ export interface OrderSelectionModalInterface {
   showModal: boolean
   toggleModal: CallableFunction
   handleMenu: CallableFunction
+  imgSrc: string;
 }
 
 const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
-  const { showModal, toggleModal, handleMenu } = props;
+  const { showModal, toggleModal, handleMenu, imgSrc } = props;
   const modal = document.getElementById("modal")!;
 
   const orderSelection = (type: string) => {
@@ -40,7 +41,7 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
             type='order selection'
             scale={250}
             name='Single' 
-            imgSrc='cheeseburger.jpg' 
+            imgSrc={imgSrc} 
             orderSelection={orderSelection}
           />
           <Link to={'menuselection'} >

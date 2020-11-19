@@ -30,7 +30,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
       <div className="item-container">
         <ItemCard 
           type='item' 
-          scale={150}
+          scale={190}
           name={selectedItem.name} 
           imgSrc={selectedItem.imgSrc}
           price={selectedItem.price}
@@ -44,7 +44,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
             <div key={key}>
               <ItemCard 
                 type='item'
-                scale={170}
+                scale={190}
                 name={item.name}
                 imgSrc={item.imgSrc}
                 price={item.price}
@@ -64,7 +64,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
             <div key={key}>
               <ItemCard 
                 type='item'
-                scale={170}
+                scale={190}
                 name={item.name}
                 imgSrc={item.imgSrc}
                 price={item.price}
