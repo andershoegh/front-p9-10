@@ -1,0 +1,62 @@
+.finish-page {
+    width: 100vw;
+    height: 100vh;
+    background-color:#46bf5b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    .header{
+        font-size: 4rem;
+        font-weight: 700;
+    }
+    .sub-header{
+        font-size: 3rem;
+        font-weight: 600;
+    }
+    .receipt{
+        position: relative;
+        width: 30%;
+        padding: 1em 1.5em;
+        margin: 2em auto;
+        color: black;
+        background: #f5f5f5;
+        width: 50vw;
+        -moz-border-radius: 5px 0 5px 5px;
+        border-radius: 5px 0 5px 5px;
+        box-shadow: -10px 13px 15px -12px black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 3rem;
+        font-weight: 500;
+        .receipt-header{
+            font-size: 2rem;
+        }
+        div:not(:nth-last-child(1)){
+            border-bottom: 3px dashed #808080;
+            text-align: center;
+            width: 100%;
+        }
+        .receipt-restaurant{
+            padding-bottom: 35px;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-style: solid;
+            background: #e6e6e6;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.2);
+            display: block;
+            width: 0;
+            border-width: 8px;
+            border-color: #46bf5b #46bf5b transparent transparent;
+            border-radius: 0 0 0 5px;
+          }
+        
+    }
+}

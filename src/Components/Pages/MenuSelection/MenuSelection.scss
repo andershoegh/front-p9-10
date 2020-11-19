@@ -22,7 +22,12 @@
       display: none;
   }
 }
-
+.disabled-link{
+  pointer-events: none;
+  #add-button{
+    background-color: lightgrey;
+  }
+}
 #add-button {
   padding: 15px 20px; 
   border-radius: 10px;
@@ -33,4 +38,10 @@
   color: #fff;
   margin: 20px 3vw;
   background-color: #048644;
+  transition: .3s;
+  &:hover{
+    transform: scale(1.2);
+    box-shadow: 0px 0px 40px #FDD68B;
+  }
+  
 }

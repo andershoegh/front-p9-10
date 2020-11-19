@@ -10,6 +10,7 @@ import CancelModal from './Components/CancelModal/CancelModal'
 import advertisement from './Resources/Images/advertisement.svg'
 import { DummyOrder } from './Utils/Order'
 import BackButton from './Components/BackButton/BackButton'
+import FinishedOrderPage from './Components/Pages/FinishedOrderPage/FinishedOrderPage'
 
 export type MenuItem = {
     type: 'burger' | 'drink' | 'side' | 'dessert' | 'menu'
@@ -92,6 +93,9 @@ const App = () => {
                     <Route path="/(menuselection|orderoverview)">
                         <BackButton />
                     </Route>
+                    <Route path="/finishedorder">
+                        <></>
+                    </Route>
                     <Route path='/'>
                         <img
                             className="advertisement"
@@ -112,6 +116,9 @@ const App = () => {
                     </Route>
                     <Route path="/orderoverview">
                         <OrderOverviewPage order={order} setOrder={setOrder}/>
+                    </Route>
+                    <Route path="/finishedorder">
+                        <FinishedOrderPage order={order}/>
                     </Route>
                     <Route path="/">
                         <WelcomePage />

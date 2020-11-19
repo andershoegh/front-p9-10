@@ -76,8 +76,8 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
           )
         })}      </div>
 
-      <Link to='mainpage'>
-        <button id='add-button' onClick={addMenuToOrder}>Add to order</button>
+      <Link to='mainpage' className={(selectedDrink && selectedSide)? '' : 'disabled-link'} >
+        <button id='add-button' onClick={addMenuToOrder} >Add to order</button>
       </Link>
     </div>
   )

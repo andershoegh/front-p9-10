@@ -8,7 +8,7 @@ export interface OrderDetailsProps {
    toggleModal: CallableFunction
 }
 
-const OrderDetails: React.FC<OrderDetailsProps> = ({order}) => {
+const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal}) => {
 
     const history = useHistory();
 
@@ -41,9 +41,6 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order}) => {
        return order.menus.reduce(reduceMenuAndItemsAmount, 0) + order.menuItems.reduce(reduceMenuAndItemsAmount, 0)
     }, [order]);
     
-    const handleCancel = ()=>{
-        history.push('/');
-    }
     const handleFinish = ()=>{
         history.push('/orderoverview');
     }
@@ -64,7 +61,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order}) => {
             </div>
 
             <div className="order-details-button-wrapper">
-                <button className="cancel-btn" onClick={() => props.toggleModal(true)} >CANCEL ORDER</button>
+                <button className="cancel-btn" onClick={() => toggleModal(true)} >CANCEL ORDER</button>
                 <button className="finish-btn" onClick={handleFinish}>FINISH ORDER</button>
             </div>
         </div>
