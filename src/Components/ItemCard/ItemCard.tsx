@@ -31,10 +31,8 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
   if(item && selectedItem) {
     if(item === selectedItem) {
       cardStyle += ' highlighted'; 
-      layout += '-highlighted';  
     } else {
       cardStyle = ' card';
-      layout = 'text-container-centered';
     }
   }
 

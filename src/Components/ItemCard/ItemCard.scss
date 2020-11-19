@@ -47,22 +47,11 @@
       margin: 0 5px;
     }
   }
-
-  .text-container-centered-highlighted {
-    height: 20%;
-    display: flex;
-    justify-content: space-around;
-    background-color: rgb(68, 143, 68);
-
-    span {
-      align-self: center;
-      margin: 0 5px;
-    }
-  }
 }
 
 .highlighted {
   transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgb(68, 143, 68);
 }
 
 
