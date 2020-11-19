@@ -8,8 +8,8 @@ import CategoryBar from '../../CategoryBar/CategoryBar';
 
 
 export interface MainPageProps {
-    addItemToOrder: (item: MenuItem) => void;
-    setCategory: (category: string) => void;
+    addItemToOrder: CallableFunction;
+    setCategory: CallableFunction;
     category: string;
     setSelectedBurger: CallableFunction;
 }
@@ -35,8 +35,10 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
 
     const handleMenu = (isMenu: boolean) => {
       if(!isMenu) {
+        console.log('add item')
         addItemToOrder(selectedItem);
       } else {
+        console.log('set selected')
         setSelectedBurger(selectedItem);
       }
     }

@@ -140,7 +140,7 @@ export const Desserts = [
     {
         name: 'McMandarin',
         imgSrc: 'mcMandarin.jpg',
-        price: 99,
+        price: 100,
         type: 'dessert' as const
     },
     {

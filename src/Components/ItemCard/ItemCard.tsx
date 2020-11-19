@@ -78,7 +78,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     <div 
       className={cardStyle}
       style={divScale}
-      onClick={() => onClickAction()}>
+      onClick={onClickAction}>
         <img src={route} alt=''></img>
         <div className={layout}>
           <span>{name.toUpperCase()}</span>
