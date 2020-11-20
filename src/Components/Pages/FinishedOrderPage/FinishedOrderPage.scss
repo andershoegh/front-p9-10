@@ -4,9 +4,15 @@
     background-color:#46bf5b;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding: 10vh 0px;
     color: white;
+    overflow: scroll;
+    >div:nth-last-child(1){
+        margin-bottom: 15vh;
+        
+    }
     .header{
         font-size: 4rem;
         font-weight: 700;
@@ -17,12 +23,11 @@
     }
     .receipt{
         position: relative;
-        width: 30%;
         padding: 1em 1.5em;
         margin: 2em auto;
         color: black;
         background: #f5f5f5;
-        width: 50vw;
+        width: 60vw;
         -moz-border-radius: 5px 0 5px 5px;
         border-radius: 5px 0 5px 5px;
         box-shadow: -10px 13px 15px -12px black;
@@ -32,10 +37,22 @@
         align-items: center;
         font-size: 3rem;
         font-weight: 500;
-        .receipt-header{
-            font-size: 2rem;
+        > div:not(:first-child){
+            padding: 20px 0px;
         }
-        div:not(:nth-last-child(1)){
+        
+        .restaurant-icon{
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(30%, 30%);
+        }
+        .restaurant-details, .receipt-header{
+            font-size: 1.8rem;
+            font-weight: 400;
+            
+        }
+        >div:not(:nth-last-child(1)){
             border-bottom: 3px dashed #808080;
             text-align: center;
             width: 100%;
@@ -46,17 +63,66 @@
         &:before {
             content: "";
             position: absolute;
-            top: 0;
-            right: 0;
+            top: -1px;
+            right: -1px;
             border-style: solid;
             background: #e6e6e6;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), -1px 1px 1px rgba(0, 0, 0, 0.2);
+            box-shadow: -1px 3px 1px rgba(0, 0, 0, 0.2), -3px 1px 0px rgba(0, 0, 0, 0.2);
             display: block;
             width: 0;
-            border-width: 8px;
+            border-width: 15px;
             border-color: #46bf5b #46bf5b transparent transparent;
             border-radius: 0 0 0 5px;
+          }  
+          .bought-items{
+              width:100%;
           }
-        
+    }
+    .table{
+        display: table;
+        font-size: 30px;
+        width:100%;
+        .table-header{
+            display: table-header-group;
+            font-weight: 700;
+            >div{
+                display: table-cell;
+            }
+        }
+        .table-body{
+            display: table-row-group;
+        }
+        .table-row{
+            display: table-row;
+        }
+        .table-cell{
+            display: table-cell;
+        }
+        .amount{
+            text-align: center;
+        }
+        .price{
+            text-align: right;
+            padding-left: 20px;
+        }
+        .desc, .item{
+            text-align: left;
+        }
+        .menu-items{
+            font-weight: 400;
+            color: grey;
+            padding-left: 35px;
+        }
+    }
+    .sum-up{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .thanks{
+        margin-top: 1em;
+        font-size: 1.6rem;
+
     }
 }

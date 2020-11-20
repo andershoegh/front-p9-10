@@ -6,45 +6,30 @@ import { useHistory } from 'react-router-dom';
 export interface OrderDetailsProps {
    order: Order
    toggleModal: CallableFunction
+   vat: number
+   cost: number
+   itemsAmount: number
 }
 
-const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal}) => {
+const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cost, itemsAmount}) => {
 
     const history = useHistory();
 
-    const getItemsPrice = (items: MenuItem[]) =>
-        items.reduce((total: number, item: MenuItem) => {
-            const amount: number = item.amount ? item.amount as number : 1;
-            return total + (item.price * amount);
-        }, 0);
-    
-    const getMenusPrice = (menus: Menu[]) =>  menus.reduce((total: number, menu: Menu) => {
-            const amount: number = menu.amount ? menu.amount as number : 1;
-            return total + (menu.burger.price + menu.drink.price + menu.side.price) * amount;
-        },  0);
    
-    const menuItemsCost: number = useMemo(()=> {
-        return getItemsPrice(order.menuItems);
-    }, [order]);
-    
-    const menusCost =  useMemo(()=> getMenusPrice(order.menus), [order]);
-
-    const vat = useMemo(() => {
-        const price: number = menuItemsCost + menusCost
-        return price - price / 1.25
-    }, [menuItemsCost, menusCost])
-
-    const getItemsAmount = useMemo(() =>  {
-        const reduceMenuAndItemsAmount = (total: number, item: MenuItem|Menu) =>{
-            return total + (item.amount? item.amount : 1);
-        };
-       return order.menus.reduce(reduceMenuAndItemsAmount, 0) + order.menuItems.reduce(reduceMenuAndItemsAmount, 0)
-    }, [order]);
     
     const handleFinish = ()=>{
-        history.push('/orderoverview');
+        if(history.location.pathname ==='/orderoverview'){
+            history.push('/finishedorder')
+        }else{
+            history.push('/orderoverview');
+        }
+        ;
     }
-
+    const emptyClass = useMemo(()=> order.menuItems.length === 0 && 
+                                    order.menus.length === 0 && 
+                                    history.location.pathname ==='/orderoverview'
+                                    ? 'empty-basket' : '',
+                                    [ order, history.location ]) ;
     return (
         <div className="order-details-wrapper">
             <div className="order-details-header">YOUR ORDER - TAKE AWAY</div>
@@ -53,16 +38,16 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal}) => {
                     <p>{'VAT ' + vat + 'DKK'}</p>
                 </div>
                 <div>
-                    <p>{'Price ' + (menuItemsCost + menusCost) + 'DKK'} </p>
+                    <p>{'Price ' + (cost) + 'DKK'} </p>
                 </div>
                 <div>
-                    <p> {'Items ' + getItemsAmount}</p>
+                    <p> {'Items ' + itemsAmount}</p>
                 </div>
             </div>
 
             <div className="order-details-button-wrapper">
                 <button className="cancel-btn" onClick={() => toggleModal(true)} >CANCEL ORDER</button>
-                <button className="finish-btn" onClick={handleFinish}>FINISH ORDER</button>
+                <button className={"finish-btn " + emptyClass} onClick={handleFinish}>FINISH ORDER</button>
             </div>
         </div>
     )

@@ -34,6 +34,8 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
           name={selectedItem.name} 
           imgSrc={selectedItem.imgSrc}
           price={selectedItem.price}
+          item={selectedItem}
+          selectedItem={selectedItem}
         />
       </div>
       

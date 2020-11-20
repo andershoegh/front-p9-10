@@ -165,7 +165,7 @@ export const Sides = [
         type: 'side' as const
     },
     {
-        name: 'Fried Bull Penis',
+        name: 'Corn dog',
         imgSrc: 'corndog.jpg',
         price: 20,
         type: 'side' as const

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
@@ -85,6 +85,34 @@ const App = () => {
     const clearOrder = () => {
       setOrder({ menuItems: [], menus: [] });
     }
+    const getItemsPrice = (items: MenuItem[]) =>
+    items.reduce((total: number, item: MenuItem) => {
+        const amount: number = item.amount ? item.amount as number : 1;
+        return total + (item.price * amount);
+    }, 0);
+
+    const getMenusPrice = (menus: Menu[]) =>  menus.reduce((total: number, menu: Menu) => {
+            const amount: number = menu.amount ? menu.amount as number : 1;
+            return total + (menu.burger.price + menu.drink.price + menu.side.price) * amount;
+        },  0);
+
+    const menuItemsCost: number = useMemo(()=> {
+        return getItemsPrice(order.menuItems);
+    }, [order]);
+
+    const menusCost =  useMemo(()=> getMenusPrice(order.menus), [order]);
+
+    const vat = useMemo(() => {
+        const price: number = menuItemsCost + menusCost
+        return price - price / 1.25
+    }, [menuItemsCost, menusCost])
+
+    const getItemsAmount = useMemo(() =>  {
+        const reduceMenuAndItemsAmount = (total: number, item: MenuItem|Menu) =>{
+            return total + (item.amount? item.amount : 1);
+        };
+    return order.menus.reduce(reduceMenuAndItemsAmount, 0) + order.menuItems.reduce(reduceMenuAndItemsAmount, 0)
+    }, [order]);
 
     return (
         <Router>
@@ -118,7 +146,10 @@ const App = () => {
                         <OrderOverviewPage order={order} setOrder={setOrder}/>
                     </Route>
                     <Route path="/finishedorder">
-                        <FinishedOrderPage order={order}/>
+                        <FinishedOrderPage order={order}
+                            vat={vat}
+                            cost={ menuItemsCost + menusCost }
+                            itemsAmount={getItemsAmount}/>
                     </Route>
                     <Route path="/">
                         <WelcomePage />
@@ -128,6 +159,9 @@ const App = () => {
                     <OrderDetails
                         order={order}
                         toggleModal={cancelModal}
+                        vat={vat}
+                        cost={ menuItemsCost + menusCost }
+                        itemsAmount={getItemsAmount}
                     />
 
                 </Route>

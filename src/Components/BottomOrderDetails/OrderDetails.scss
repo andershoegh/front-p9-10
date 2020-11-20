@@ -44,6 +44,11 @@
     .finish-btn {
         background-color: #048644;
         margin-left: 10px;
+        &.empty-basket{
+            pointer-events: none;
+            background-color: lightgrey;
+            box-shadow: none;
+        }
     }
     .cancel-btn {
         background-color: #aa3b4a;
