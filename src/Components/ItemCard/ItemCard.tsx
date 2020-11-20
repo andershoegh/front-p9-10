@@ -40,7 +40,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
   const divScale = {
     width: scale,
     height: scale,
-    'font-size': fontSize
+    fontSize: fontSize
   }
 
   if(item && selectedItem) {
