@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
 import MainPage from './Components/Pages/MainPage/MainPage'
@@ -40,10 +40,6 @@ const App = () => {
     const [category, setCategory] = useState<string>('Burgers');
     const [selectedBurger, setSelectedBurger] = useState<MenuItem>(DummyOrder.burgers[0])
     const [showCancelModal, setShowCancelModal] = useState<boolean>(false)
-
-    const setInitialOrder = () =>{
-       setOrder({ menuItems: [], menus: [] });
-    }
 
     const addSingleItemToOrder = (item: MenuItem) => {
         let sameIndex = null;
