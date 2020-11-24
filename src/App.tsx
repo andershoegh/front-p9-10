@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
 import MainPage from './Components/Pages/MainPage/MainPage'
@@ -18,6 +18,7 @@ export type MenuItem = {
     imgSrc: string
     price: number
     amount?: number
+    note?: string
 }
 
 export type Menu = {
@@ -26,6 +27,7 @@ export type Menu = {
     drink: MenuItem
     side: MenuItem
     amount?: number
+    note?: string
 }
 
 export type Order = {
@@ -39,9 +41,6 @@ const App = () => {
     const [selectedBurger, setSelectedBurger] = useState<MenuItem>(DummyOrder.burgers[0])
     const [showCancelModal, setShowCancelModal] = useState<boolean>(false)
 
-    const setInitialOrder = () =>{
-       setOrder({ menuItems: [], menus: [] });
-    }
     const addSingleItemToOrder = (item: MenuItem) => {
         let sameIndex = null;
         order.menuItems.forEach((menuItem, index) =>{
@@ -143,7 +142,7 @@ const App = () => {
                         <MenuSelection selectedItem={selectedBurger} addItemToOrder={addMenuToOrder} />
                     </Route>
                     <Route path="/orderoverview">
-                        <OrderOverviewPage order={order} setOrder={setOrder}/>
+                        <OrderOverviewPage order={order} setOrder={setOrder} />
                     </Route>
                     <Route path="/finishedorder">
                         <FinishedOrderPage order={order}

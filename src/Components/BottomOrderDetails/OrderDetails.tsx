@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import './OrderDetails.scss'
-import { MenuItem, Menu, Order } from '../../App';
+import { Order } from '../../App';
 import { useHistory } from 'react-router-dom';
 
 export interface OrderDetailsProps {
@@ -14,22 +14,20 @@ export interface OrderDetailsProps {
 const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cost, itemsAmount}) => {
 
     const history = useHistory();
-
-   
     
     const handleFinish = ()=>{
         if(history.location.pathname ==='/orderoverview'){
             history.push('/finishedorder')
         }else{
             history.push('/orderoverview');
-        }
-        ;
+        };
     }
-    const emptyClass = useMemo(()=> order.menuItems.length === 0 && 
-                                    order.menus.length === 0 && 
-                                    history.location.pathname ==='/orderoverview'
-                                    ? 'empty-basket' : '',
-                                    [ order, history.location ]) ;
+    const emptyClass = useMemo(()=>{ 
+        return order.menuItems.length === 0 
+            && order.menus.length === 0 
+            ? 'empty-basket' : ''}
+        , [ order ]) ;
+
     return (
         <div className="order-details-wrapper">
             <div className="order-details-header">YOUR ORDER - TAKE AWAY</div>
