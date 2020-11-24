@@ -39,7 +39,7 @@ const FinishedOrderPage: React.SFC<FinishedOrderPageProps> = ({ order, vat, cost
                 <div className="bought-items">
                     <div   className="table">
                         <div className="table-header">
-                            <div className="desc">Desc</div>
+                            <div className="desc">DESC</div>
                             <div className="amount">QTY</div>
                             <div className="price">DKK</div>
                         </div>
