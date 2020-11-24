@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './OrderSelectionModal.scss'
 import ItemCard from '../ItemCard/ItemCard'
@@ -13,6 +13,7 @@ export interface OrderSelectionModalInterface {
 const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
   const { showModal, toggleModal, handleMenu, imgSrc } = props;
   const modal = document.getElementById("modal")!;
+  let btnStyle = '';
 
   const orderSelection = (type: string) => {
     if (type === 'Single') {
@@ -32,6 +33,23 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
       modal.style.display = 'none';
     }
   }
+
+  const modalKeyPress = (e: KeyboardEvent) => {       
+    switch(e.key) {
+        case 'ArrowRight':
+            console.log('right')
+            break;
+        case 'ArrowLeft':
+            console.log('left')
+            break;
+        case 'ArrowDown':
+            btnStyle = ' cancel-btn-highlighted';
+            console.log('down')
+            break;
+        case 'Enter':
+            break;
+    }
+}
 
   return (
     <div id="modal">
@@ -55,7 +73,7 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
             />
           </Link>
         </div>
-        <button onClick={() => toggleModal(false)}>CANCEL</button>
+        <button className={btnStyle} onClick={() => toggleModal(false)}>CANCEL</button>
       </div>
     </div>
   )
