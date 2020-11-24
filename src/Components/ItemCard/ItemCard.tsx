@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './ItemCard.scss'
 import { MenuItem } from '../../App'
 
@@ -14,16 +14,26 @@ export interface ItemCardProps {
   orderSelection?: CallableFunction;
   setSelectedItem?: CallableFunction;
   selectedItem?: MenuItem;
+  highlightedItem?: string;
   onClick?: () => void;
   className?: string;
+  enterPress?: boolean;
+  setEnterPress?: CallableFunction;
 }
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-  const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem, selectedItem, className, onClick} = props;
+  const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem, selectedItem, highlightedItem, className, onClick, enterPress, setEnterPress} = props;
   let layout = type !== 'item' ? 'text-container' : 'text-container-centered';
   let fontSize;
   let cardStyle = className + ' card';
   const route = './products/' + imgSrc;
+
+  useEffect(() => {
+      if(enterPress && name === highlightedItem && setEnterPress) {
+        setEnterPress(false);
+        onClickAction();
+      }
+  }, [enterPress, highlightedItem, setEnterPress, item])
 
   if(type !== 'item') {
     layout = 'text-container';
@@ -43,9 +53,11 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     fontSize: fontSize
   }
 
-  if(item && selectedItem) {
+  if((selectedItem || highlightedItem) && item) {
     if(item === selectedItem) {
-      cardStyle += ' highlighted'; 
+      cardStyle += ' selected'; 
+    } else if(name === highlightedItem) {
+        cardStyle += ' highlighted'
     } else {
       cardStyle = ' card';
     }

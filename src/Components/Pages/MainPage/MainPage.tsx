@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import  {  MenuItem }  from '../../../App';
 import * as Products from '../../../Utils/ProductItems'
-import OrderDetails from '../../BottomOrderDetails/OrderDetails';
 import ItemGrid from '../../ItemGrid/ItemGrid'
 import OrderSelectionModal from '../../OrderSelectionModal/OrderSelectionModal'
 import CategoryBar from '../../CategoryBar/CategoryBar';
@@ -23,8 +22,6 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
     const { addItemToOrder, setCategory, category, setSelectedBurger } = props;
     const [showModal, setShowModal] = useState<boolean>(false);
     const [selectedItem, setSelectedItem] = useState<MenuItem>(Products.Burgers[0]);
-    type categories = 'Burgers' | 'Drinks' | 'Sides' | 'Desserts';
-    const [selectedCategory, setSelectedCategory] = useState<categories>('Burgers');
 
     const toggleModal = (toggle: boolean, item?: MenuItem) => {
         setShowModal(toggle);
@@ -51,8 +48,8 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
             <ItemGrid 
                 toggleModal={toggleModal} 
                 addItemToOrder={addItemToOrder}
-                category={category} 
-                items={Products[category as keyof ProductKeys]} />
+                items={Products[category as keyof ProductKeys]}
+            />
             <OrderSelectionModal 
               showModal={showModal} 
               toggleModal={toggleModal}
