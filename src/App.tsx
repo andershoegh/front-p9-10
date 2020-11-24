@@ -18,6 +18,7 @@ export type MenuItem = {
     imgSrc: string
     price: number
     amount?: number
+    note?: string
 }
 
 export type Menu = {
@@ -26,6 +27,7 @@ export type Menu = {
     drink: MenuItem
     side: MenuItem
     amount?: number
+    note?: string
 }
 
 export type Order = {
@@ -42,6 +44,7 @@ const App = () => {
     const setInitialOrder = () =>{
        setOrder({ menuItems: [], menus: [] });
     }
+
     const addSingleItemToOrder = (item: MenuItem) => {
         let sameIndex = null;
         order.menuItems.forEach((menuItem, index) =>{
@@ -143,7 +146,7 @@ const App = () => {
                         <MenuSelection selectedItem={selectedBurger} addItemToOrder={addMenuToOrder} />
                     </Route>
                     <Route path="/orderoverview">
-                        <OrderOverviewPage order={order} setOrder={setOrder}/>
+                        <OrderOverviewPage order={order} setOrder={setOrder} />
                     </Route>
                     <Route path="/finishedorder">
                         <FinishedOrderPage order={order}
