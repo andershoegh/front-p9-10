@@ -32,10 +32,8 @@ const MainPage: React.FC<MainPageProps> = (props: MainPageProps) => {
 
     const handleMenu = (isMenu: boolean) => {
       if(!isMenu) {
-        console.log('add item')
         addItemToOrder(selectedItem);
       } else {
-        console.log('set selected')
         setSelectedBurger(selectedItem);
       }
     }

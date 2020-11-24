@@ -19,62 +19,61 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
     const highlightedItem = () => {
         return items[highlightedItemNumber];
     }
-
-    const handleKeyPress = (e: KeyboardEvent) => {
-        switch(e.key) {
-            case 'ArrowRight':
-                if(highlightedItemNumber > 2) {
-                    gridContain?.scroll({
-                        top: 0,
-                        left: 200,
-                        behavior: 'smooth'
-                    });
-                }
-                if(highlightedItemNumber < arrayLength - 3) {
-                    setHighlightedItemNumber(highlightedItemNumber + 3);
-                } else if(arrayLength % 3 !== 0 && highlightedItemNumber < arrayLength) {
-                    setHighlightedItemNumber(arrayLength - 1);
-                }
-                break;
-            case 'ArrowLeft':
-                if(highlightedItemNumber > 2) {
-                    setHighlightedItemNumber(highlightedItemNumber - 3);
-                    gridContain?.scroll({
-                        top: 0,
-                        left: -200,
-                        behavior: 'smooth'
-                    });
-                } else if(highlightedItemNumber > 0) {
-                    // Change focus to CategoryBar
-                }
-                break;
-            case 'ArrowUp':
-                if((highlightedItemNumber) % 3 === 0) {
-                    // Out of bounds top
-                } else if(highlightedItemNumber > 0) {
-                    setHighlightedItemNumber(highlightedItemNumber - 1);
-                }
-                break;
-            case 'ArrowDown':
-                if((highlightedItemNumber + 1) % 3 === 0) {
-                    // Change focus to BottomOrderDetails
-                } else if(highlightedItemNumber < arrayLength -1) {
-                    setHighlightedItemNumber(highlightedItemNumber + 1);
-                }
-                break;
-            case 'Enter':
-                setEnterPress(true);
-                break;
-        }
-    }
-
+    
     useEffect(() => {
+        const handleKeyPress = (e: KeyboardEvent) => {
+            switch(e.key) {
+                case 'ArrowRight':
+                    if(highlightedItemNumber > 2) {
+                        gridContain?.scroll({
+                            top: 0,
+                            left: 200,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if(highlightedItemNumber < arrayLength - 3) {
+                        setHighlightedItemNumber(highlightedItemNumber + 3);
+                    } else if(arrayLength % 3 !== 0 && highlightedItemNumber < arrayLength) {
+                        setHighlightedItemNumber(arrayLength - 1);
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if(highlightedItemNumber > 2) {
+                        setHighlightedItemNumber(highlightedItemNumber - 3);
+                        gridContain?.scroll({
+                            top: 0,
+                            left: -200,
+                            behavior: 'smooth'
+                        });
+                    } else if(highlightedItemNumber > 0) {
+                        // Change focus to CategoryBar
+                    }
+                    break;
+                case 'ArrowUp':
+                    if((highlightedItemNumber) % 3 === 0) {
+                        // Out of bounds top
+                    } else if(highlightedItemNumber > 0) {
+                        setHighlightedItemNumber(highlightedItemNumber - 1);
+                    }
+                    break;
+                case 'ArrowDown':
+                    if((highlightedItemNumber + 1) % 3 === 0) {
+                        // Change focus to BottomOrderDetails
+                    } else if(highlightedItemNumber < arrayLength -1) {
+                        setHighlightedItemNumber(highlightedItemNumber + 1);
+                    }
+                    break;
+                case 'Enter':
+                    setEnterPress(true);
+                    break;
+            }
+        }
         window.addEventListener('keydown', handleKeyPress);
-
         return () => {
+            console.log("unbind")
             window.removeEventListener('keydown', handleKeyPress);
         }
-    })
+    }, [highlightedItemNumber, setHighlightedItemNumber, gridContain, arrayLength]);
 
   return(
     <div className="grid-container" id='grid-contain'>

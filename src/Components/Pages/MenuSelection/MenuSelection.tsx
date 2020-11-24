@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './MenuSelection.scss'
-import { MenuItem, Menu } from '../../../App'
-import ItemGrid from '../../ItemGrid/ItemGrid'
+import { MenuItem } from '../../../App'
 import ItemCard from '../../ItemCard/ItemCard'
 import { Sides, Drinks } from '../../../Utils/ProductItems'
 

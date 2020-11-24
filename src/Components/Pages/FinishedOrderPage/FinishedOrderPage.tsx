@@ -11,8 +11,7 @@ export interface FinishedOrderPageProps {
     itemsAmount: number
 }
  
-const FinishedOrderPage: React.SFC<FinishedOrderPageProps> = ({ order, vat, cost, itemsAmount}) => {
-    console.log(order)
+const FinishedOrderPage: React.SFC<FinishedOrderPageProps> = ({ order, cost }) => {
     return ( 
         <div className="finish-page">
             <div className="header">
