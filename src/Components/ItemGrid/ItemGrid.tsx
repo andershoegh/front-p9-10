@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { MenuItem } from '../../App';
+import { ControlledComponentContext } from '../../Contexts/ControlledComponentContext';
 import ItemCard from '../ItemCard/ItemCard'
 import './ItemGrid.scss'
 
@@ -15,6 +16,7 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
   const [enterPress, setEnterPress] = useState<boolean>(false);
   const arrayLength = items.length;
   const gridContain = document.getElementById('grid-contain');
+  const { controlled, setControlled } = useContext(ControlledComponentContext);
 
     const highlightedItem = () => {
         return items[highlightedItemNumber];
@@ -45,8 +47,9 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
                             left: -200,
                             behavior: 'smooth'
                         });
-                    } else if(highlightedItemNumber > 0) {
+                    } else if(highlightedItemNumber >= 0) {
                         // Change focus to CategoryBar
+                        setControlled('category');
                     }
                     break;
                 case 'ArrowUp':
@@ -59,6 +62,7 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
                 case 'ArrowDown':
                     if((highlightedItemNumber + 1) % 3 === 0) {
                         // Change focus to BottomOrderDetails
+                        setControlled('orderDetails');
                     } else if(highlightedItemNumber < arrayLength -1) {
                         setHighlightedItemNumber(highlightedItemNumber + 1);
                     }
@@ -68,12 +72,15 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
                     break;
             }
         }
-        window.addEventListener('keydown', handleKeyPress);
+        if(controlled === 'itemGrid'){
+            window.addEventListener('keydown', handleKeyPress);
+        }
+        
         return () => {
             console.log("unbind")
             window.removeEventListener('keydown', handleKeyPress);
         }
-    }, [highlightedItemNumber, setHighlightedItemNumber, gridContain, arrayLength]);
+    }, [highlightedItemNumber, setHighlightedItemNumber, gridContain, arrayLength, setControlled, controlled]);
 
   return(
     <div className="grid-container" id='grid-contain'>
@@ -87,6 +94,7 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
               imgSrc={item.imgSrc} 
               price={item.price}
               item={item}
+              parentComponent={'itemGrid'}
               toggleModal={toggleModal}
               addItemToOrder={addItemToOrder}
               highlightedItem={highlightedItem().name}

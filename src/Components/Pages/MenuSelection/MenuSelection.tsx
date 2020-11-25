@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './MenuSelection.scss'
-import { MenuItem } from '../../../App'
+import { Menu, MenuItem } from '../../../App'
 import ItemCard from '../../ItemCard/ItemCard'
 import { Sides, Drinks } from '../../../Utils/ProductItems'
 
@@ -34,7 +34,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
           imgSrc={selectedItem.imgSrc}
           price={selectedItem.price}
           item={selectedItem}
-          selectedItem={selectedItem}
+          selectedItem={selectedItem?.name}
         />
       </div>
       
@@ -51,7 +51,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                 price={item.price}
                 item={item}
                 setSelectedItem={setSelectedDrink}
-                selectedItem={selectedDrink}
+                selectedItem={selectedDrink?.name}
               />
             </div>
           )
@@ -71,7 +71,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                 price={item.price}
                 item={item}
                 setSelectedItem={setselectedSide}
-                selectedItem={selectedSide}
+                selectedItem={selectedSide?.name}
               />
             </div>
           )

@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
 import './ItemCard.scss'
 import { MenuItem } from '../../App'
+import { ControlledComponentContext } from '../../Contexts/ControlledComponentContext';
 
 export interface ItemCardProps {
   type: string;
@@ -13,57 +14,40 @@ export interface ItemCardProps {
   addItemToOrder?: CallableFunction;
   orderSelection?: CallableFunction;
   setSelectedItem?: CallableFunction;
-  selectedItem?: MenuItem;
+  selectedItem?: string;
   highlightedItem?: string;
   onClick?: () => void;
-  className?: string;
   enterPress?: boolean;
   setEnterPress?: CallableFunction;
+  parentComponent?: string;
 }
 
 const ItemCard: React.FC<ItemCardProps> = (props) => {
-  const { type, scale, name, imgSrc, price, item, toggleModal, addItemToOrder, orderSelection, setSelectedItem, selectedItem, highlightedItem, className, onClick, enterPress, setEnterPress} = props;
+  const { 
+    type, 
+    scale, 
+    name, 
+    imgSrc, 
+    price, 
+    item, 
+    toggleModal, 
+    addItemToOrder, 
+    orderSelection, 
+    setSelectedItem, 
+    selectedItem, 
+    highlightedItem, 
+    onClick, 
+    enterPress, 
+    setEnterPress,
+    parentComponent
+  } = props;
   let layout = type !== 'item' ? 'text-container' : 'text-container-centered';
   let fontSize;
-  let cardStyle = className + ' card';
+  let cardStyle = ' card';
   const route = './products/' + imgSrc;
+  const  { controlled } = useContext(ControlledComponentContext);
 
-  useEffect(() => {
-      if(enterPress && name === highlightedItem && setEnterPress) {
-        setEnterPress(false);
-        onClickAction();
-      }
-  }, [enterPress, highlightedItem, setEnterPress, item])
-
-  if(type !== 'item') {
-    layout = 'text-container';
-    fontSize = 0.8 * (scale / 120) + 'em';
-  } else {
-    layout = 'text-container-centered';
-    if (name.length > 20) {
-      fontSize = 0.8 * (scale / 280) + 'em';
-    } else {
-      fontSize = 0.8 * (scale / 200) + 'em';
-    }
-  }
-
-  const divScale = {
-    width: scale,
-    height: scale,
-    fontSize: fontSize
-  }
-
-  if((selectedItem || highlightedItem) && item) {
-    if(item === selectedItem) {
-      cardStyle += ' selected'; 
-    } else if(name === highlightedItem) {
-        cardStyle += ' highlighted'
-    } else {
-      cardStyle = ' card';
-    }
-  }
-
-  const onClickAction = () => {
+  const onClickAction = useCallback(() => {
     switch (type) {
       case 'category':
         if(onClick) {
@@ -84,7 +68,43 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
           orderSelection(name);
         }
     }
+  },[ addItemToOrder, item, toggleModal, orderSelection, onClick, type, name, setSelectedItem]);
+
+  useEffect(() => {
+      if(enterPress && name === highlightedItem && setEnterPress) {
+        setEnterPress(false);
+        onClickAction();
+      }
+  }, [enterPress, highlightedItem, setEnterPress, item, onClickAction, name]);
+
+  if(type !== 'item') {
+    layout = 'text-container';
+    fontSize = 0.8 * (scale / 120) + 'em';
+  } else {
+    layout = 'text-container-centered';
+    if (name.length > 20) {
+      fontSize = 0.8 * (scale / 280) + 'em';
+    } else {
+      fontSize = 0.8 * (scale / 200) + 'em';
+    }
   }
+
+  const divScale = {
+    width: scale,
+    height: scale,
+    fontSize: fontSize
+  }
+
+  if((selectedItem || highlightedItem) && name) {
+    if(name === highlightedItem && controlled === parentComponent) {
+      cardStyle += ' highlighted'
+    } else if( name === selectedItem) {
+      cardStyle += ' selected'; 
+    } else {
+      cardStyle = ' card';
+    }
+  }
+ 
 
   return (
     <div 
