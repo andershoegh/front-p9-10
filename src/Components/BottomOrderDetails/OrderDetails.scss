@@ -36,7 +36,7 @@
         transition: 0.2s ease-in-out;
         box-shadow: 0px 0px 5px #000;
         &:focus,
-        &:hover {
+        &:hover, &.highlighted {
             transform: scale(1.04);
             box-shadow: 0px 0px 40px #fdd68b;
         }
