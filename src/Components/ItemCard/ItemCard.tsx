@@ -45,7 +45,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
   let fontSize;
   let cardStyle = ' card';
   const route = './products/' + imgSrc;
-  const  { controlled } = useContext(ControlledComponentContext);
+  const  { controlled, setControlled } = useContext(ControlledComponentContext);
 
   const onClickAction = useCallback(() => {
     switch (type) {
@@ -57,6 +57,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
       case 'item':
         if(toggleModal && item?.type === 'burger') {
           toggleModal(true, item);
+          setControlled('orderSelectionModal');
         } else if(addItemToOrder && item) {
           addItemToOrder(item);
         } else if(setSelectedItem && item) {
