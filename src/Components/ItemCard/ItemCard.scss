@@ -1,8 +1,8 @@
 $card-scale: 2em;
 
 .card {
-  width: var(--card-width);
-  height: var(--card-height);
+  min-width: var(--card-width);
+  min-height: var(--card-height);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0px 8px 40px rgba(0, 0, 0, .1);

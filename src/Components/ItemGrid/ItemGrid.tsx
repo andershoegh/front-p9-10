@@ -77,7 +77,6 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
         }
         
         return () => {
-            console.log("unbind")
             window.removeEventListener('keydown', handleKeyPress);
         }
     }, [highlightedItemNumber, setHighlightedItemNumber, gridContain, arrayLength, setControlled, controlled]);
