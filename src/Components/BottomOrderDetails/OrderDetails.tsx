@@ -62,7 +62,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
         return ()=>
             window.removeEventListener('keydown', handleKeyDown);
 
-    }, [orderButtons, controlled, highlightedNumber, highlightedItem, setHighlightedNumber, setControlled]);
+    }, [orderButtons, controlled, highlightedNumber, highlightedItem, setHighlightedNumber, setControlled, history.location.pathname]);
 
     useEffect(()=>{
         if(controlled === 'category'){
@@ -92,7 +92,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
 
     const handleFinish = ()=>{
         if(history.location.pathname ==='/orderoverview'){
-            history.push('/finishedorder')
+            history.push('/finishedorder');
+            setControlled('finishedOrder');
         }else{
             history.push('/orderoverview');
         };
