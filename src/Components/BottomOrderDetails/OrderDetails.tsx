@@ -47,6 +47,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
                         break;
                     case 'Enter':
                         const clickable =  buttons[num] as HTMLDivElement;
+                        setControlled(num > 0 ? 'orderOverview' : 'cancelModal');
                         clickable.click();
                 }
             }
@@ -74,8 +75,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
         if(orderButtons.current){
             const num = highlightedNumber;
             const buttons = orderButtons.current.children;
-            for( let i = 0; i < buttons.length; i++){
-                if( controlled === 'orderDetails' && i === num){
+            for(let i = 0; i < buttons.length; i++){
+                if(controlled === 'orderDetails' && i === num){
                     buttons[i].classList.add('highlighted');
                 }else{
                     buttons[i].classList.remove('highlighted');  

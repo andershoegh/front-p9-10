@@ -64,21 +64,14 @@
       transform-origin: center;
       transition: all .3s;
 
-      &:hover {
+      &:hover,
+      &.highlighted {
         box-shadow: 0px 5px 8px rgba(0, 0, 0, .2);
         background-color: change-color($color: #D29099, $saturation: 90%, $alpha: 1.0);
         transform: scale(1.1);
       }
     }
   }
-
-
-}
-
-.cancel-btn-highlighted {
-    box-shadow: 0px 5px 8px rgba(0, 0, 0, .2);
-    background-color: change-color($color: #D29099, $saturation: 90%, $alpha: 1.0);
-    transform: scale(1.1);
 }
 
 @keyframes fromBottom {
