@@ -33,7 +33,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
         
                 switch(e.key){
                     case 'ArrowUp':
-                        setControlled( num > 0 ? 'itemGrid': 'category');
+                        const nextControlled = history.location.pathname === '/orderoverview' ? 'orderOverview':  num > 0 ? 'itemGrid': 'category' ;
+                        setControlled(nextControlled);
                         break;
                     case 'ArrowRight':
                         if(num<buttons.length-1 && !buttons[1].classList.contains('empty-basket')){
@@ -47,6 +48,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
                         break;
                     case 'Enter':
                         const clickable =  buttons[num] as HTMLDivElement;
+                        setControlled(num > 0 ? controlled : 'cancelModal' );
                         clickable.click();
                 }
             }

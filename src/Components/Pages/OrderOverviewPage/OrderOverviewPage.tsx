@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
-import { Order } from '../../../App'
+import React, {useContext, useEffect, useState} from 'react'
+import { MenuItem, Order } from '../../../App'
 import FlatItemCard from '../../FlatItemCard/FlatItemCard'
 import './OrderOverviewPage.scss'
 import Stepper from '../../Stepper/Stepper'
 import NoteModal from '../../NoteModal/NoteModal'
+import { ControlledComponentContext } from '../../../Contexts/ControlledComponentContext'
 
 export interface OrderOverviewPageProps {
     order: Order;
@@ -13,12 +14,169 @@ export interface OrderNoteData{
     type: string;
     index: number;
 }
-
+function indexClosestToEnd(array: MenuItem[]): number{
+    const length = array.length;
+    if(length > 4){
+        for(let i = length; i>length-4; i--){
+            if(i % 4 === 0 || i % 4 === 3){
+                return i * 2 - 1;
+            }
+        }
+    }
+    return length < 2 ? 1 : length * 2 - 1;
+}
 const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order, setOrder }) => {
     const [modal, setModal]  = useState<boolean>(false);
     const [currentItem, setCurrentItem] = useState<string>('');
     const [orderNoteDetails, setOrderNoteDetails] = useState<OrderNoteData>({index:-1, type:''})
-    
+    const [higlightedItem, setHiglightedItem] = useState(
+        {
+            index: indexClosestToEnd(order.menuItems), 
+            area: (order.menuItems.length ?  ('singleItems') : ( order.menus.length ? 'menus' : 'backButton'))
+        }
+    );
+ 
+    const [ right, setRight ] = useState(true);
+    const { controlled, setControlled } = useContext(ControlledComponentContext);
+
+    useEffect(()=>{
+        const menusSteppers = document.querySelectorAll('.menuDisplay button');
+        const singleItemSteppers = document.querySelectorAll('.singleItems button');
+        const backButton = document.querySelector('.back-card');
+        if(higlightedItem.area === 'menus'){
+            const { index } = higlightedItem;
+            const newVal = index === 1  || ( index % 3 === 1);
+
+            if(newVal !== right && index % 3 !== 2)
+                setRight(newVal);
+        }
+        const handleKeyDown = (e: KeyboardEvent) =>{
+            const { index, area } = higlightedItem;
+            
+            switch(e.key){
+                case 'ArrowUp':
+                    if(area === 'singleItems'){
+                        const hasElAbove = (index - 8) >= 0;
+                        
+                        if(menusSteppers.length>0 || hasElAbove){
+                            const newIdx = hasElAbove ?  index-8 : menusSteppers.length-1 ;
+                            const newArea = hasElAbove ? area : 'menus' ;
+                            setHiglightedItem({index: newIdx, area: newArea});
+                        }else{
+                            setHiglightedItem({index, area: 'backButton'});
+                        }
+                    } else if(index >= 0 ){
+                        if(index < 2){
+                            setHiglightedItem({index, area: 'backButton'});
+                        }else{
+                            const note = index % 3 === 2;
+                            const newIdx = index - (note ? (right ? 1 : 2) : (right ? 2 : 1)); 
+                            setHiglightedItem({index: newIdx, area});
+                        }
+                    }
+                    break;
+                case 'ArrowDown':
+                    if(area === 'singleItems'){
+                        const hasElBelow = (index + 8) < (singleItemSteppers.length);
+                        const newIdx = hasElBelow ? index + 8 : index;
+                        if(hasElBelow){
+                            setHiglightedItem({index: newIdx, area});
+                        }else{
+                            setControlled('orderDetails');
+                        }
+                    }else if(area === 'menus'){
+                        if(index < menusSteppers.length-1){
+                            const note = index % 3 === 2;
+                            const newIdx = index + (note ? (right ? 2 : 1) : (right ? 1 : 2)); 
+                            setHiglightedItem({index: newIdx, area});
+                        }else if(index === menusSteppers.length-1){
+                            if(singleItemSteppers.length){
+                                const newIdx = singleItemSteppers.length >= 8 ? (right ? 8-1 : 8-2) : singleItemSteppers.length-1;
+                                setHiglightedItem({area: 'singleItems', index: newIdx});
+                            }else{
+                                setControlled('orderDetails');
+                            }
+                        }
+                    }else if(area === 'backButton'){
+                        const newArea = order.menus.length ? 'menus' : order.menuItems ? 'singleItems' : 'orderDetails';
+                        if(newArea !== 'orderDetails'){
+                            setHiglightedItem({index, area: newArea});
+                        }else{
+                            setControlled(newArea);
+                        }
+                    }
+                    break;
+                case 'ArrowRight':
+                    if(area === 'menus'){
+                        if(index % 3 === 0){ //This is minus buttons
+                            setHiglightedItem({index: index+1, area});
+                        }
+                    }else if(area === 'singleItems'){
+                        if( index=== 0||(index % 8 !== 7 && index < singleItemSteppers.length-1)){
+                            setHiglightedItem({index: index+1, area});
+                        }
+                    }
+                    break;
+                case 'ArrowLeft':
+                    if(area === 'menus'){
+                        if(index % 3 === 1){
+                            setHiglightedItem({index: index-1, area});
+                        }
+                    }else if(area === 'singleItems'){
+                        if(index % 8 !== 0 && index > 0){
+                            setHiglightedItem({index: index-1, area});
+                        }
+                    }
+                    break;
+                case 'Enter':
+                    const clickable = (area === 'menus' ?
+                          menusSteppers[index]
+                        : area === 'singleItems' ? 
+                          singleItemSteppers[index]
+                        : backButton) as HTMLDivElement;
+                    clickable.click();
+            }
+        }
+        if(controlled === 'orderOverview'){
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return ()=>{
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [higlightedItem, controlled, setControlled, right, setRight, order])
+
+    useEffect(()=>{ // UseEffect that sets the styling
+        const combinedNodeList = document.querySelectorAll('.menuDisplay button, .singleItems button, .back-card');
+        combinedNodeList.forEach(el=>{
+                el.classList.remove('highlighted');
+        });
+
+        if(controlled === 'orderOverview'){
+            const { index, area } = higlightedItem;
+            const backButton: HTMLDivElement|null = document.querySelector('.back-card');
+            const nodeList = area === 'menus' ? document.querySelectorAll('.menuDisplay button') : document.querySelectorAll('.singleItems button');
+            
+            if(area === 'backButton'){
+                backButton?.classList.add('highlighted');
+            }else{
+                const block = area === 'menus' ? 'end' : 'center';
+                nodeList[index]?.scrollIntoView({ behavior: 'smooth', block});
+                nodeList[index]?.classList.add('highlighted');
+            }
+            
+
+        }
+    },[controlled, setControlled, higlightedItem, order]);
+
+    useEffect(()=>{
+        const { area, index }  = higlightedItem;
+        const theOrder = area === 'menus' ? order.menus : order.menuItems;
+        const multiplier = area === 'menus' ? 3 : 2;
+        const maxIndex = theOrder.length*multiplier-1;
+        if(area !== 'backButton' && maxIndex < index){
+            setHiglightedItem({area, index: maxIndex});
+        }
+    }, [ order, higlightedItem]);
     const increment = (type: string, index: number) => {
         let newOrder = {...order};
         const newNumber : number = newOrder[type as keyof Order][index].amount as number + 1;
@@ -67,7 +225,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order, setOrder }
             <div className="order-overview">
                 { (order.menus && order.menus.length > 0) && 
                     <>
-                        <div className="headline">MENUS</div>
+                        <div className="headline menus-wrapper">MENUS</div>
                             {order.menus.map((menu, index) => {
                                 return (
                                     <div className="menuDisplay" key={'burger-'+ index}>
