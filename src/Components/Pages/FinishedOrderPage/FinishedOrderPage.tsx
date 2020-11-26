@@ -15,21 +15,22 @@ export interface FinishedOrderPageProps {
 const FinishedOrderPage: React.FC<FinishedOrderPageProps> = ({ order, cost, clearOrder }) => {
     const { controlled, setControlled } = useContext(ControlledComponentContext);
     const history = useHistory();
-    const container = document.getElementById('finish-page');
 
     useEffect(() => {
+        const container = document.getElementById('finish-page');
+
         const handleKeyDown = (e: KeyboardEvent) => {
             if(container) {
                 switch(e.key) {
                     case 'ArrowUp':
-                        container?.scrollBy({
+                        container.scrollBy({
                             top: -400,
                             left: 0,
                             behavior: 'smooth'
                         });
                         break;
                     case 'ArrowDown':
-                        container?.scrollBy({
+                        container.scrollBy({
                             top: 400,
                             left: 0,
                             behavior: 'smooth'
@@ -48,7 +49,7 @@ const FinishedOrderPage: React.FC<FinishedOrderPageProps> = ({ order, cost, clea
         }
         return () => 
             window.removeEventListener('keydown', handleKeyDown);
-    }, [controlled, setControlled, history, container, clearOrder])
+    }, [controlled, setControlled, history, clearOrder])
 
     return ( 
         <div id='finish-page'>
