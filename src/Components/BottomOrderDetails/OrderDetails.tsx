@@ -33,7 +33,11 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
         
                 switch(e.key){
                     case 'ArrowUp':
-                        setControlled( num > 0 ? 'itemGrid': 'category');
+                        if(history.location.pathname === '/mainpage') {
+                            setControlled( num > 0 ? 'itemGrid': 'category');
+                        } else if(history.location.pathname === '/menuselection') {
+                            setControlled('menuSelection');
+                        }
                         break;
                     case 'ArrowRight':
                         if(num<buttons.length-1 && !buttons[1].classList.contains('empty-basket')){
