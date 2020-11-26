@@ -95,8 +95,9 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
 
     const handleFinish = ()=>{
         if(history.location.pathname ==='/orderoverview'){
-            history.push('/finishedorder');
             setControlled('finishedOrder');
+            history.push('/finishedorder');
+            
         }else{
             history.push('/orderoverview');
         };
