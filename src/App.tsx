@@ -148,10 +148,11 @@ const App = () => {
                             <OrderOverviewPage order={order} setOrder={setOrder} />
                         </Route>
                         <Route path="/finishedorder">
-                            <FinishedOrderPage order={order}
-                                vat={vat}
+                            <FinishedOrderPage 
+                                order={order}
                                 cost={ menuItemsCost + menusCost }
-                                itemsAmount={getItemsAmount}/>
+                                clearOrder={clearOrder}
+                            />
                         </Route>
                         <Route path="/">
                             <WelcomePage />

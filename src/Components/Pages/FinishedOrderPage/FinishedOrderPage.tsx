@@ -1,21 +1,59 @@
-import * as React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import './FinishedOrderPage.scss';
 import '../OrderOverviewPage/OrderOverviewPage';
 import { Order } from '../../../App';
 import FLAIcon from '../../../Resources/Icons/FLAIcon';
+import { ControlledComponentContext } from '../../../Contexts/ControlledComponentContext';
 
 export interface FinishedOrderPageProps {
     order: Order
-    vat: number
     cost: number
-    itemsAmount: number
+    clearOrder: CallableFunction
 }
  
-const FinishedOrderPage: React.SFC<FinishedOrderPageProps> = ({ order, cost }) => {
+const FinishedOrderPage: React.FC<FinishedOrderPageProps> = ({ order, cost, clearOrder }) => {
+    const { controlled, setControlled } = useContext(ControlledComponentContext);
+    const history = useHistory();
+    const container = document.getElementById('finish-page');
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if(container) {
+                switch(e.key) {
+                    case 'ArrowUp':
+                        container?.scrollBy({
+                            top: -400,
+                            left: 0,
+                            behavior: 'smooth'
+                        });
+                        break;
+                    case 'ArrowDown':
+                        container?.scrollBy({
+                            top: 400,
+                            left: 0,
+                            behavior: 'smooth'
+                        });
+                        break;
+                    case 'Enter':
+                        history.push('/');
+                        clearOrder();
+                        setControlled('none');
+                }
+            }
+        }
+
+        if(controlled === 'finishedOrder') {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => 
+            window.removeEventListener('keydown', handleKeyDown);
+    }, [controlled, setControlled, history, container, clearOrder])
+
     return ( 
-        <div className="finish-page">
+        <div id='finish-page'>
             <div className="header">
-                Thank you for your order
+                Thank you for your order!
             </div>
             <div className="sub-header">
                 It's currently being prepared
@@ -44,9 +82,9 @@ const FinishedOrderPage: React.SFC<FinishedOrderPageProps> = ({ order, cost }) =
                         </div>
                         <div className="table-body">
                             {order.menus &&
-                                order.menus.map(menu=>{  
+                                order.menus.map((menu, key)=>{  
                                     return ( 
-                                        <div className="table-row" key={menu.burger.name}>
+                                        <div className="table-row" key={menu.burger.name + key.toString()}>
                                             <div className="table-cell item">
                                                 <div className="menu-name">
                                                     {menu.burger.name + ' Menu'}
