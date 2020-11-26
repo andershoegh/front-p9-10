@@ -37,6 +37,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
                             setControlled( num > 0 ? 'itemGrid': 'category');
                         } else if(history.location.pathname === '/menuselection') {
                             setControlled('menuSelection');
+                        } else if(history.location.pathname === '/orderoverview') {
+                            setControlled('orderOverview');
                         }
                         break;
                     case 'ArrowRight':
@@ -51,7 +53,8 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
                         break;
                     case 'Enter':
                         const clickable =  buttons[num] as HTMLDivElement;
-                        setControlled(num > 0 ? 'orderOverview' : 'cancelModal');
+                        setControlled(num > 0 ? controlled : 'cancelModal' );
+                        //setControlled(num > 0 ? 'orderOverview' : 'cancelModal'); Lasses
                         clickable.click();
                 }
             }

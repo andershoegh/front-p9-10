@@ -10,7 +10,7 @@ $arrowColor: #a7a7a7;
     transform-origin: left top;
     transition: .3s;
     
-    &:hover{
+    &:hover, &.highlighted{
         transform: scale(1.3);
     }
 
