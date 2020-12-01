@@ -14,7 +14,7 @@ interface MenuSelectionProps {
 const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
     const { selectedItem, addItemToOrder } = props;
     const { controlled, setControlled } = useContext(ControlledComponentContext);
-    const [highlightedDiv, setHighlightedDiv] = useState(0);
+    const [highlightedDiv, setHighlightedDiv] = useState(1);
     const [highlightedDrink, setHighlightedDrink] = useState(0);
     const [highlightedSide, setHighlightedSide] = useState(0);
     const [selectedDrink, setSelectedDrink] = useState<MenuItem>();
@@ -26,7 +26,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
     const drinksDiv = useRef<HTMLDivElement>(null);
     const sidesDiv = useRef<HTMLDivElement>(null);
     const addBtnRef = useRef<HTMLButtonElement>(null);
-    const divArray = useMemo(() => [mainDiv, drinksDiv, sidesDiv, addBtnRef], [mainDiv, drinksDiv, sidesDiv, addBtnRef])
+    const divArray = useMemo(() => [mainDiv, drinksDiv, sidesDiv, addBtnRef], [mainDiv, drinksDiv, sidesDiv, addBtnRef]);
 
     const addMenuToOrder = () => {
         if(selectedDrink && selectedSide) {
@@ -37,6 +37,8 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
     }
 
     useEffect(() => {
+        const backBtnDiv = document.querySelector('.back-card');
+
         const handleKeyDown = (e: KeyboardEvent) => {
             if(drinksDiv.current && sidesDiv.current && addBtnRef.current) {
                 const drinks = drinksDiv.current.children;
@@ -45,6 +47,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                 const divNum = highlightedDiv;
                 const drinkNum = highlightedDrink;
                 const sideNum = highlightedSide;
+                const divArrayFull = [backBtnDiv, ...divArray];
             
                 switch(e.key) {
                     case 'ArrowUp':
@@ -55,14 +58,14 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                         }
                         break;
                     case 'ArrowDown':
-                        if((divArray[highlightedDiv] === sidesDiv && addBtn.classList.contains('disabled-link')) || highlightedDiv === divArray.length - 1) {
+                        if((divArrayFull[highlightedDiv] === sidesDiv && addBtn.classList.contains('disabled-link')) || highlightedDiv === divArrayFull.length - 1) {
                             setControlled('orderDetails');
-                        } else if(highlightedDiv < divArray.length - 1) {
+                        } else if(highlightedDiv < divArrayFull.length - 1) {
                             setHighlightedDiv(divNum + 1);
                         }
                         break;
                     case 'ArrowLeft':
-                        if(divArray[highlightedDiv] === drinksDiv) {
+                        if(divArrayFull[highlightedDiv] === drinksDiv) {
                             if(drinkNum > 0) {
                                 setHighlightedDrink(drinkNum - 1);
                                 drinksContainer?.scrollBy({
@@ -71,7 +74,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                                     behavior: 'smooth'
                                 })
                             }
-                        } else if(divArray[highlightedDiv] === sidesDiv) {
+                        } else if(divArrayFull[highlightedDiv] === sidesDiv) {
                             if(sideNum > 0) {
                                 setHighlightedSide(sideNum - 1);
                                 sidesContainer?.scrollBy({
@@ -83,7 +86,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                         }
                         break;
                     case 'ArrowRight':
-                        if(divArray[highlightedDiv] === drinksDiv) {
+                        if(divArrayFull[highlightedDiv] === drinksDiv) {
                             if(drinkNum < drinks.length - 1) {
                                 setHighlightedDrink(drinkNum + 1);
                                 if(drinkNum > 2) {
@@ -94,7 +97,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                                     })
                                 }
                             }
-                        } else if(divArray[highlightedDiv] === sidesDiv) {
+                        } else if(divArrayFull[highlightedDiv] === sidesDiv) {
                             if(sideNum < sides.length - 1) {
                                 setHighlightedSide(sideNum + 1);
                                 if(sideNum > 2) {
@@ -108,13 +111,16 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                         }
                         break;
                     case 'Enter':
-                        if(divArray[highlightedDiv] === drinksDiv) {
+                        if(divArrayFull[highlightedDiv] === drinksDiv) {
                             setSelectedDrink(Drinks[highlightedDrink]);
-                        } else if(divArray[highlightedDiv] === sidesDiv) {
+                        } else if(divArrayFull[highlightedDiv] === sidesDiv) {
                             setselectedSide(Sides[highlightedSide]);
-                        } else if(divArray[highlightedDiv] === addBtnRef) {
+                        } else if(divArrayFull[highlightedDiv] === addBtnRef) {
                             addBtn.click();
                             setControlled('category');
+                        } else if(divArrayFull[highlightedDiv] === backBtnDiv) {
+                            const clickable = backBtnDiv as HTMLDivElement;
+                            clickable.click();
                         }
                         break;
                 }
@@ -141,15 +147,9 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
         sidesContainer,
         highlightedDrink,
         highlightedSide
-    ])
+    ]);
 
     useEffect(() => {
-        if(controlled !== 'menuSelection' && controlled !== 'orderDetails' && controlled !== 'cancelModal') {
-            setHighlightedDiv(0);
-            setHighlightedDrink(0);
-            setHighlightedSide(0);
-        }
-
         if(mainDiv.current && drinksDiv.current && sidesDiv.current && addBtnRef.current) {
             const main = mainDiv.current.children;
             const drinks = drinksDiv.current.children;
@@ -157,18 +157,19 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
             const addBtn = addBtnRef.current;
             const drinkNum = highlightedDrink;
             const sideNum = highlightedSide;
+            const backBtnDiv = document.querySelector('.back-card');
+            const divArrayFull = [backBtnDiv, ...divArray];
 
             if(controlled === 'menuSelection') {
-                if(divArray[highlightedDiv] === mainDiv) {
-                    drinks[drinkNum].classList.remove('highlighted');
-                    sides[sideNum].classList.remove('highlighted');
-                    addBtn.classList.remove('highlighted');
+                backBtnDiv?.classList.remove('highlighted');
+                main[0].classList.remove('highlighted');
+                drinks[drinkNum].classList.remove('highlighted');
+                sides[sideNum].classList.remove('highlighted');
+                addBtn.classList.remove('highlighted');
+
+                if(divArrayFull[highlightedDiv] === mainDiv) {
                     main[0].classList.add('highlighted');
-                } else if(divArray[highlightedDiv] === drinksDiv) {
-                    sides[sideNum].classList.remove('highlighted');
-                    addBtn.classList.remove('highlighted');
-                    main[0].classList.remove('highlighted');
-                    
+                } else if(divArrayFull[highlightedDiv] === drinksDiv) {                 
                     for(let i = 0; i < drinks.length; i++) {
                         if(drinkNum === i) {
                             drinks[i].classList.add('highlighted');
@@ -176,12 +177,7 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                             drinks[i].classList.remove('highlighted');
                         }
                     }
-
-                } else if(divArray[highlightedDiv] === sidesDiv) {
-                    drinks[drinkNum].classList.remove('highlighted');
-                    addBtn.classList.remove('highlighted');
-                    main[0].classList.remove('highlighted');
-                    
+                } else if(divArrayFull[highlightedDiv] === sidesDiv) {                   
                     for(let j = 0; j < sides.length; j++) {
                         if(sideNum === j) {
                             sides[j].classList.add('highlighted');
@@ -189,25 +185,18 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                             sides[j].classList.remove('highlighted');
                         }
                     }
-
-                } else if(highlightedDiv === 10) {
-                    drinks[drinkNum].classList.remove('highlighted');
-                    sides[sideNum].classList.remove('highlighted');
-                    addBtn.classList.remove('highlighted');
-                    main[0].classList.remove('highlighted');
-                } else if(divArray[highlightedDiv] === addBtnRef) {
-                    drinks[drinkNum].classList.remove('highlighted');
-                    sides[sideNum].classList.remove('highlighted');
-                    main[0].classList.remove('highlighted');
+                } else if(divArrayFull[highlightedDiv] === backBtnDiv) {
+                    backBtnDiv?.classList.add('highlighted');
+                } else if(divArrayFull[highlightedDiv] === addBtnRef) {
                     addBtn.classList.add('highlighted');
                 }
             } else {
                 drinks[drinkNum].classList.remove('highlighted');
                 sides[sideNum].classList.remove('highlighted');
                 main[0].classList.remove('highlighted');
+                backBtnDiv?.classList.remove('highlighted');
                 addBtn.classList.remove('highlighted');
             }
-
         }
     }, 
     [
