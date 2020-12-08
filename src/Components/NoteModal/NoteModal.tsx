@@ -77,11 +77,18 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
                 break;
             case 'Enter':
                 if(highlightedDiv === 'textAreaDiv') {
+                    let clickable = textArea as HTMLTextAreaElement;
                     if(!isTyping){
-                        let clickable = textArea as HTMLTextAreaElement;
                         clickable.focus();
                         setIsTyping(true);
+                    } else {
+                        clickable.blur();
+                        setIsTyping(false);
                     }
+                } else if(highlightedDiv === 'buttonDiv') {
+                    let clickable = buttonContainer?.children[highlightedBtn] as HTMLButtonElement;
+                    clickable.click();
+                    setControlled('orderOverview');
                 }
                 break;
         }
