@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef, useMemo, useState } from 'react'
+import React, { useEffect, useContext, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { ControlledComponentContext } from '../../Contexts/ControlledComponentContext';
 import './CancelModal.scss'

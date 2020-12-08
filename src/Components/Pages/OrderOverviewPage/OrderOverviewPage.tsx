@@ -217,7 +217,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order, setOrder }
         const type = item.type === 'menu' ? 'menus': 'menuItems';
         setOrderNoteDetails({index, type});
         toggleModal(itemName);
-
+        setControlled('noteModal');
     }
     return (
         <>
