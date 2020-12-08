@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useContext } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.scss'
 import OrderDetails from './Components/BottomOrderDetails/OrderDetails'
@@ -13,6 +13,8 @@ import BackButton from './Components/BackButton/BackButton'
 import FinishedOrderPage from './Components/Pages/FinishedOrderPage/FinishedOrderPage'
 import ControlledComponentContextProvider from './Contexts/ControlledComponentContext'
 // import ControlledComponentContextProvider from './Contexts/ControlledComponentContext'
+
+import SocketConnectionContextProvider, { SocketConnectionContext } from './Contexts/SocketConnectionContext'; 
 
 export type MenuItem = {
     type: 'burger' | 'drink' | 'side' | 'dessert' | 'menu'
@@ -38,10 +40,18 @@ export type Order = {
 }
 
 const App = () => {
+    const { socket } = useContext(SocketConnectionContext);
     const [order, setOrder] = useState<Order>({ menuItems: [], menus: [] });
     const [category, setCategory] = useState<string>('Burgers');
     const [selectedBurger, setSelectedBurger] = useState<MenuItem>(DummyOrder.burgers[0])
     const [showCancelModal, setShowCancelModal] = useState<boolean>(false)
+    
+    socket.on('tablet navigation', (input: string) => {
+        console.log('navigation: ' + input);
+        const kbEvent = new KeyboardEvent('keydown', {'key': input});
+        window.dispatchEvent(kbEvent);
+    })
+    
     const addSingleItemToOrder = (item: MenuItem) => {
         let sameIndex = null;
         order.menuItems.forEach((menuItem, index) =>{
@@ -117,60 +127,60 @@ const App = () => {
     return (
         <Router>
             <div className="App">
-                {/* <ControlledComponentContextProvider> */}
-                <ControlledComponentContextProvider>
-                    <Switch>
-                        <Route path="/(menuselection|orderoverview)">
-                            <BackButton />
-                        </Route>
-                        <Route path="/finishedorder">
-                            <></>
-                        </Route>
-                        <Route path='/'>
-                            <img
-                                className="advertisement"
-                                src={advertisement}
-                                alt="Advertisement of corn dog"
-                            />
-                        </Route>
-                    </Switch>
-                
-                    <Switch>
-                        <Route path="/mainpage">
-                            <>
-                                <MainPage addItemToOrder={addSingleItemToOrder}  setCategory={setCategory} category={category} setSelectedBurger={setSelectedBurger} />
-                            </>
-                        </Route>
-                        <Route path="/menuselection">
-                            <MenuSelection selectedItem={selectedBurger} addItemToOrder={addMenuToOrder} />
-                        </Route>
-                        <Route path="/orderoverview">
-                            <OrderOverviewPage order={order} setOrder={setOrder} />
-                        </Route>
-                        <Route path="/finishedorder">
-                            <FinishedOrderPage 
+                <SocketConnectionContextProvider>
+                    <ControlledComponentContextProvider>
+                        <Switch>
+                            <Route path="/(menuselection|orderoverview)">
+                                <BackButton />
+                            </Route>
+                            <Route path="/finishedorder">
+                                <></>
+                            </Route>
+                            <Route path='/'>
+                                <img
+                                    className="advertisement"
+                                    src={advertisement}
+                                    alt="Advertisement of corn dog"
+                                />
+                            </Route>
+                        </Switch>
+                    
+                        <Switch>
+                            <Route path="/mainpage">
+                                <>
+                                    <MainPage addItemToOrder={addSingleItemToOrder}  setCategory={setCategory} category={category} setSelectedBurger={setSelectedBurger} />
+                                </>
+                            </Route>
+                            <Route path="/menuselection">
+                                <MenuSelection selectedItem={selectedBurger} addItemToOrder={addMenuToOrder} />
+                            </Route>
+                            <Route path="/orderoverview">
+                                <OrderOverviewPage order={order} setOrder={setOrder} />
+                            </Route>
+                            <Route path="/finishedorder">
+                                <FinishedOrderPage 
+                                    order={order}
+                                    cost={ menuItemsCost + menusCost }
+                                    clearOrder={clearOrder}
+                                />
+                            </Route>
+                            <Route path="/">
+                                <WelcomePage />
+                            </Route>
+                        </Switch>
+                        <Route path="/(mainpage|menuselection|orderoverview)">
+                            <OrderDetails
                                 order={order}
+                                toggleModal={cancelModal}
+                                vat={vat}
                                 cost={ menuItemsCost + menusCost }
-                                clearOrder={clearOrder}
+                                itemsAmount={getItemsAmount}
                             />
-                        </Route>
-                        <Route path="/">
-                            <WelcomePage />
-                        </Route>
-                    </Switch>
-                    <Route path="/(mainpage|menuselection|orderoverview)">
-                        <OrderDetails
-                            order={order}
-                            toggleModal={cancelModal}
-                            vat={vat}
-                            cost={ menuItemsCost + menusCost }
-                            itemsAmount={getItemsAmount}
-                        />
 
-                    </Route>
-                    <CancelModal showModal={showCancelModal} toggleModal={cancelModal} clearOrder={clearOrder} />
-                {/* </ControlledComponentContextProvider> */}
-                </ControlledComponentContextProvider>
+                        </Route>
+                        <CancelModal showModal={showCancelModal} toggleModal={cancelModal} clearOrder={clearOrder} />
+                    </ControlledComponentContextProvider>
+                </SocketConnectionContextProvider>
             </div>
         </Router>
     )

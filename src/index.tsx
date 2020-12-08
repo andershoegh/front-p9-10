@@ -3,13 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { io } from 'socket.io-client';
-
-const socket = io();
-
-socket.on('navigation', (input: string) => {
-    window.dispatchEvent(new KeyboardEvent('keydown', {'key': input}));
-})
 
 ReactDOM.render(
   <React.StrictMode>

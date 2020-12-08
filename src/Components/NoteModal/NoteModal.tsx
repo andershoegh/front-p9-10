@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { ControlledComponentContext } from '../../Contexts/ControlledComponentContext';
+import { SocketConnectionContext } from '../../Contexts/SocketConnectionContext';
 import './NoteModal.scss'
 
 export interface NoteModalProps {
@@ -18,6 +19,7 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
   const [highlightedBtn, setHighlightedBtn] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
   const { controlled, setControlled } = useContext(ControlledComponentContext);
+  const { socket } = useContext(SocketConnectionContext);
   const textArea = document.querySelector('.note-input');
   const buttonContainer = document.querySelector('.button-container');
   
@@ -81,6 +83,7 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
                     if(!isTyping){
                         clickable.focus();
                         setIsTyping(true);
+                        socket.emit('alphanumeric input', true);
                     } else {
                         clickable.blur();
                         setIsTyping(false);
