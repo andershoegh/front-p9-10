@@ -40,18 +40,19 @@ export type Order = {
 }
 
 const App = () => {
-    const { socket } = useContext(SocketConnectionContext);
     const [order, setOrder] = useState<Order>({ menuItems: [], menus: [] });
     const [category, setCategory] = useState<string>('Burgers');
-    const [selectedBurger, setSelectedBurger] = useState<MenuItem>(DummyOrder.burgers[0])
-    const [showCancelModal, setShowCancelModal] = useState<boolean>(false)
+    const [selectedBurger, setSelectedBurger] = useState<MenuItem>(DummyOrder.burgers[0]);
+    const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
+    const { socket } = useContext(SocketConnectionContext);
+    
+    console.log('rerender');
     
     socket.on('tablet navigation', (input: string) => {
         console.log('navigation: ' + input);
-        const kbEvent = new KeyboardEvent('keydown', {'key': input});
-        window.dispatchEvent(kbEvent);
-    })
-    
+        window.dispatchEvent(new KeyboardEvent('keydown', {'key': input}));
+    });
+  
     const addSingleItemToOrder = (item: MenuItem) => {
         let sameIndex = null;
         order.menuItems.forEach((menuItem, index) =>{
