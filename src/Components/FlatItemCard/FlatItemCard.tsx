@@ -1,13 +1,13 @@
 import React from 'react'
 import './FlatItemCard.scss'
 
-export interface FlatItemCard {
+export interface FlatItemCardProps {
     name: string
     imgSrc: string
     price?: number
 }
 
-const FlatItemCard: React.FC<FlatItemCard> = (props) => {
+const FlatItemCard: React.FC<FlatItemCardProps> = (props) => {
     const { name, imgSrc, price } = props
     const textContainer = price ? 'text-container' : 'text-container-centered'
 

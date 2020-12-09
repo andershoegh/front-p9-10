@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import './InteractionTile.scss'
 
@@ -9,12 +9,9 @@ interface InteractionTileProps {
     onClick?: CallableFunction
 }
 
-const InteractionTile: React.FC<InteractionTileProps> = ({
-    icon,
-    text,
-    link,
-    onClick
-}) => {
+const InteractionTile: React.FC<InteractionTileProps> = (props) => {
+    const { icon, text, link, onClick } = props;
+
     return (
         <Link to={link}>
             <div className="tile" onClick={()=> onClick ? onClick() : null}>

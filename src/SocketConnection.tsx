@@ -17,6 +17,11 @@ export const listen = () => {
             receiveNote(true, input);
             window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
         });
+
+        socketConnection.on('phone connected', (input: string) => {
+            console.log('interaction type received from server');
+            window.dispatchEvent(new CustomEvent('interaction type', { detail: input }));
+        });
     }
 };
 

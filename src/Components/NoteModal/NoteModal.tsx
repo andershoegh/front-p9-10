@@ -12,11 +12,11 @@ export interface NoteModalProps {
 }
 
 let noteReceived = false;
-let textReceived = ''; 
+let receivedText = ''; 
 
 export const receiveNote = (received: boolean, input: string) => {
     noteReceived = received;
-    textReceived = input;
+    receivedText = input;
 }
 
 const NoteModal: React.FC<NoteModalProps> = (props) => {
@@ -31,9 +31,9 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
   const buttonContainer = document.querySelector('.button-container');
 
   useEffect(() => {
-    setNote(textReceived);
+    setNote(receivedText);
     noteReceived = false;
-  }, [noteReceived])
+  }, [note, noteReceived]);
 
   useEffect(()=>{
     if(prevNote && prevNote !== ''){
