@@ -12,9 +12,7 @@ import { DummyOrder } from './Utils/Order'
 import BackButton from './Components/BackButton/BackButton'
 import FinishedOrderPage from './Components/Pages/FinishedOrderPage/FinishedOrderPage'
 import ControlledComponentContextProvider from './Contexts/ControlledComponentContext'
-// import ControlledComponentContextProvider from './Contexts/ControlledComponentContext'
-
-import SocketConnectionContextProvider, { SocketConnectionContext } from './Contexts/SocketConnectionContext'; 
+import * as SocketConnection from './SocketConnection';
 
 export type MenuItem = {
     type: 'burger' | 'drink' | 'side' | 'dessert' | 'menu'
@@ -23,7 +21,7 @@ export type MenuItem = {
     price: number
     amount?: number
     note?: string
-}
+};
 
 export type Menu = {
     type: 'menu'
@@ -32,26 +30,21 @@ export type Menu = {
     side: MenuItem
     amount?: number
     note?: string
-}
+};
 
 export type Order = {
     menuItems: MenuItem[]
     menus: Menu[]
-}
+};
+
+SocketConnection.connect();
+SocketConnection.listen();
 
 const App = () => {
     const [order, setOrder] = useState<Order>({ menuItems: [], menus: [] });
     const [category, setCategory] = useState<string>('Burgers');
     const [selectedBurger, setSelectedBurger] = useState<MenuItem>(DummyOrder.burgers[0]);
     const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
-    const { socket } = useContext(SocketConnectionContext);
-    
-    console.log('rerender');
-    
-    socket.on('tablet navigation', (input: string) => {
-        console.log('navigation: ' + input);
-        window.dispatchEvent(new KeyboardEvent('keydown', {'key': input}));
-    });
   
     const addSingleItemToOrder = (item: MenuItem) => {
         let sameIndex = null;
@@ -128,7 +121,6 @@ const App = () => {
     return (
         <Router>
             <div className="App">
-                <SocketConnectionContextProvider>
                     <ControlledComponentContextProvider>
                         <Switch>
                             <Route path="/(menuselection|orderoverview)">
@@ -181,7 +173,6 @@ const App = () => {
                         </Route>
                         <CancelModal showModal={showCancelModal} toggleModal={cancelModal} clearOrder={clearOrder} />
                     </ControlledComponentContextProvider>
-                </SocketConnectionContextProvider>
             </div>
         </Router>
     )

@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react';
 import { ControlledComponentContext } from '../../Contexts/ControlledComponentContext';
-// import { SocketConnectionContext } from '../../Contexts/SocketConnectionContext';
-import './NoteModal.scss'
+import { emit as SocketConnectionEmit } from '../../SocketConnection';
+import './NoteModal.scss';
 
 export interface NoteModalProps {
   showModal: boolean;
@@ -11,7 +11,13 @@ export interface NoteModalProps {
   prevNote?: string
 }
 
-// const { socket } = useContext(SocketConnectionContext);
+let noteReceived = false;
+let textReceived = ''; 
+
+export const receiveNote = (received: boolean, input: string) => {
+    noteReceived = received;
+    textReceived = input;
+}
 
 const NoteModal: React.FC<NoteModalProps> = (props) => {
   const { showModal, toggleModal, item, setOrderNote, prevNote } = props;
@@ -23,12 +29,18 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
   const { controlled, setControlled } = useContext(ControlledComponentContext);
   const textArea = document.querySelector('.note-input');
   const buttonContainer = document.querySelector('.button-container');
-  
+
+  useEffect(() => {
+    setNote(textReceived);
+    noteReceived = false;
+  }, [noteReceived])
+
   useEffect(()=>{
     if(prevNote && prevNote !== ''){
       setNote(prevNote);
     }
-  }, [prevNote])
+  }, [prevNote]);
+
   if(modal) {
     if(showModal) {
       modal.style.display = 'block';
@@ -36,6 +48,7 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
       modal.style.display = 'none';
     }
   }
+
   const discardNote = ()=>{
     if(prevNote === note || ( prevNote && note ==='') ){
       setOrderNote('');
@@ -43,12 +56,14 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
     toggleModal();
     setNote('');
   }
+
   const addNote = () =>{
     //Do stuff
     setOrderNote(note);
     toggleModal();
     setNote('');
   }
+
   const handleInput = (e:any)=>{
     setNote(e.currentTarget.value);
   }
@@ -84,7 +99,7 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
                     if(!isTyping){
                         clickable.focus();
                         setIsTyping(true);
-                        // socket.emit('alphanumeric input', true);
+                        SocketConnectionEmit('alphanumeric input', note);
                     } else {
                         clickable.blur();
                         setIsTyping(false);
