@@ -7,7 +7,7 @@ import WelcomePage from './Components/Pages/WelcomePage/WelcomePage'
 import OrderOverviewPage from './Components/Pages/OrderOverviewPage/OrderOverviewPage'
 import MenuSelection from './Components/Pages/MenuSelection/MenuSelection'
 import CancelModal from './Components/CancelModal/CancelModal'
-import advertisement from './Resources/Images/advertisement.svg'
+import headerImage from './Resources/Images/header-corn-dog.svg'
 import { DummyOrder } from './Utils/Order'
 import BackButton from './Components/BackButton/BackButton'
 import FinishedOrderPage from './Components/Pages/FinishedOrderPage/FinishedOrderPage'
@@ -132,8 +132,8 @@ const App = () => {
                             <Route path='/'>
                                 <img
                                     className="advertisement"
-                                    src={advertisement}
-                                    alt="Advertisement of corn dog"
+                                    src={headerImage}
+                                    alt="header of corn dog"
                                 />
                             </Route>
                         </Switch>
