@@ -166,7 +166,7 @@ export const Sides = [
     },
     {
         name: 'Corn dog',
-        imgSrc: 'corndog.jpg',
+        imgSrc: 'cornDog.jpg',
         price: 20,
         type: 'side' as const
     },
