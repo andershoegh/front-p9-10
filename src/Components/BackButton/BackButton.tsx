@@ -9,10 +9,10 @@ export interface BackButtonProps {
  
 const BackButton: React.FC<BackButtonProps> = () => {
     const history = useHistory();
-    const { setControlled } = React.useContext(ControlledComponentContext);
+    const { controlled, setControlled } = React.useContext(ControlledComponentContext);
 
     const handleBack= ()=>{
-        setControlled('itemGrid');
+        setControlled(controlled !== 'none' ? 'itemGrid' : 'none');
         history.goBack();  
     };
     

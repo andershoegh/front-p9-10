@@ -19,7 +19,6 @@ export const listen = () => {
         });
 
         socketConnection.on('phone connected', (input: string) => {
-            console.log('interaction type received from server');
             window.dispatchEvent(new CustomEvent('interaction type', { detail: input }));
         });
     }

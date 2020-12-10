@@ -27,8 +27,8 @@ const CancelModal: React.FC<CancelModalProps> = (props) => {
 
     const cancelClick = () => {
         toggleModal(false);
-        clearOrder();
         history.push('/');
+        clearOrder();
     }
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const CancelModal: React.FC<CancelModalProps> = (props) => {
                         break;
                     case 'Enter':
                         const clickable = buttons[num] as HTMLDivElement;
-                        setControlled(num > 0 ? 'orderDetails' : 'none');
+                        setControlled(controlled === 'none' ? 'none' : num > 0 ? 'orderDetails' : 'welcomePage');
                         clickable.click();
                         break;
                 }

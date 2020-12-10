@@ -14,11 +14,12 @@
         
     }
     .header{
-        font-size: 4rem;
+        font-size: 6vmin;
         font-weight: 700;
+        text-align: center;
     }
     .sub-header{
-        font-size: 3rem;
+        font-size: 4vmin;
         font-weight: 600;
     }
     .receipt{
@@ -48,7 +49,7 @@
             transform: translate(30%, 30%);
         }
         .restaurant-details, .receipt-header{
-            font-size: 1.8rem;
+            font-size: 2.5vmin;
             font-weight: 400;
             
         }
@@ -59,6 +60,7 @@
         }
         .receipt-restaurant{
             padding-bottom: 35px;
+            font-size: 5vmin;
         }
         &:before {
             content: "";
@@ -80,7 +82,7 @@
     }
     .table{
         display: table;
-        font-size: 30px;
+        font-size: 3vmin;
         width:100%;
         .table-header{
             display: table-header-group;
@@ -119,10 +121,11 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        font-size: 6vmin;
     }
     .thanks{
         margin-top: 1em;
-        font-size: 1.6rem;
+        font-size: 2.3vmin;
 
     }
 }

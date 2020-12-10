@@ -2,6 +2,7 @@
     font-family: 'Roboto Light' sans-serif;
     color: #787878;
     text-transform: uppercase;
+    font-size: 2vmin;
 
     width: 70vw;
     margin: 20px auto 0 3vw;
@@ -25,18 +26,18 @@
     width: fit-content;
     flex-flow: row nowrap;
     column-gap: 25px;
-    padding: 20px 3vw 30px;
+    padding: 20px 3vw 2.5vh;
 }
 
 #add-button {
-    padding: 15px 20px; 
+    padding: 1.5vh 20px; 
     border-radius: 10px;
     border: none;
     font-size: 15px;
     text-transform: uppercase;
     font-weight: 600;
     color: #fff;
-    margin: 20px 3vw;
+    margin: 1vh 3vw;
     background-color: #048644;
     transition: .3s;
     &:hover{

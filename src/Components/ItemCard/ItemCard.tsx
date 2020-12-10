@@ -42,7 +42,6 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
     parentComponent
   } = props;
   let layout = type !== 'item' ? 'text-container' : 'text-container-centered';
-  let fontSize;
   let cardStyle = ' card';
   const route = './products/' + imgSrc;
   const  { controlled, setControlled } = useContext(ControlledComponentContext);
@@ -57,7 +56,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
       case 'item':
         if(toggleModal && item?.type === 'burger') {
           toggleModal(true, item);
-          setControlled('orderSelectionModal');
+          setControlled(controlled !== 'none' ? 'orderSelectionModal' : 'none');
         } else if(addItemToOrder && item) {
           addItemToOrder(item);
         } else if(setSelectedItem && item) {
@@ -77,23 +76,23 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
         onClickAction();
       }
   }, [enterPress, highlightedItem, setEnterPress, item, onClickAction, name]);
+  
+  const divScale = {
+      width: (scale / 10.2) + 'vmin',
+      height: (scale / 10.2) + 'vmin',
+      fontSize: ''
+  }
 
   if(type !== 'item') {
     layout = 'text-container';
-    fontSize = 0.8 * (scale / 120) + 'em';
+    divScale.fontSize = (scale / 90) + 'vmin';
   } else {
     layout = 'text-container-centered';
-    if (name.length > 20) {
-      fontSize = 0.8 * (scale / 280) + 'em';
+    if (name.length > 24) {
+      divScale.fontSize = (scale / 230) + 'vmin';
     } else {
-      fontSize = 0.8 * (scale / 200) + 'em';
+      divScale.fontSize = (scale / 170) + 'vmin';
     }
-  }
-
-  const divScale = {
-    width: scale,
-    height: scale,
-    fontSize: fontSize
   }
 
   if((selectedItem || highlightedItem) && name) {

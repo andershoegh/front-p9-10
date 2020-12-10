@@ -8,14 +8,13 @@
 .order-details-header {
     background-color: #ffbe5f;
     color: #fff;
-    font-size: 40px;
+    font-size: 3vmin;
     font-style: normal;
     font-weight: 600;
     line-height: 27px;
     letter-spacing: 2px;
-    padding: 30px 50px;
+    padding: 1.7vh 5vw;
     margin: 0px;
-    margin-bottom: 20px;
 }
 
 .order-details-button-wrapper {
@@ -25,13 +24,13 @@
 
     button {
         width: 50%;
-        padding: 20px;
+        padding: 2vmin;
         border-radius: 10px;
         border: none;
-        font-size: 28px;
+        font-size: 2.5vmin;
         font-weight: 600;
         color: #fff;
-        margin: 20px;
+        margin: 0 2vw 1vh;
         transform-origin: center;
         transition: 0.2s ease-in-out;
         box-shadow: 0px 0px 5px #000;
@@ -60,8 +59,9 @@
     display: flex;
     position: relative;
     flex-direction: row;
-    padding: 20px 30px;
-    font-size: 28px;
+    justify-content: center;
+    padding: 2vh 0;
+    font-size: 2.5vmin;
     font-weight: 600;
     width: 100vw;
     div {

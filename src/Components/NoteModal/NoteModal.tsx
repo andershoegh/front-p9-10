@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ControlledComponentContext } from '../../Contexts/ControlledComponentContext';
-import { emit as SocketConnectionEmit } from '../../SocketConnection';
+import { emit, emit as SocketConnectionEmit } from '../../SocketConnection';
 import './NoteModal.scss';
 
 export interface NoteModalProps {
@@ -30,10 +30,17 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
   const textArea = document.querySelector('.note-input');
   const buttonContainer = document.querySelector('.button-container');
 
+  if(prevNote) {
+      emit('prev note', prevNote);
+  };
+
   useEffect(() => {
-    setNote(receivedText);
-    noteReceived = false;
-  }, [note, noteReceived]);
+    if(controlled !== 'none' && noteReceived) {
+        setNote(receivedText);
+        noteReceived = false;
+        receivedText = '';
+    }
+  }, [note, noteReceived, controlled, prevNote]);
 
   useEffect(()=>{
     if(prevNote && prevNote !== ''){
@@ -107,7 +114,7 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
                 } else if(highlightedDiv === 'buttonDiv') {
                     let clickable = buttonContainer?.children[highlightedBtn] as HTMLButtonElement;
                     clickable.click();
-                    setControlled('orderOverview');
+                    setControlled(controlled !== 'none' ? 'orderOverview' : 'none');
                 }
                 break;
         }

@@ -53,8 +53,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
                         break;
                     case 'Enter':
                         const clickable =  buttons[num] as HTMLDivElement;
-                        setControlled(num > 0 ? controlled : 'cancelModal' );
-                        //setControlled(num > 0 ? 'orderOverview' : 'cancelModal'); Lasses
+                        setControlled(num > 0 ? controlled : controlled !== 'none' ? 'cancelModal' : 'none');
                         clickable.click();
                 }
             }
@@ -95,7 +94,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({order, toggleModal, vat, cos
 
     const handleFinish = ()=>{
         if(history.location.pathname ==='/orderoverview'){
-            setControlled('finishedOrder');
+            setControlled(controlled !== 'none' ? 'finishedOrder' : 'none');
             history.push('/finishedorder');
             
         }else{

@@ -39,7 +39,7 @@ const FinishedOrderPage: React.FC<FinishedOrderPageProps> = ({ order, cost, clea
                     case 'Enter':
                         history.push('/');
                         clearOrder();
-                        setControlled('none');
+                        setControlled('welcomePage');
                 }
             }
         }

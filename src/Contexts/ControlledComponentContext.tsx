@@ -7,10 +7,11 @@ export interface ControlledComponentType {
     controlled: string, 
     setControlled: CallableFunction
 };
-export const ControlledComponentContext = createContext<ControlledComponentType>({controlled:'none', setControlled:()=>{}});
+export const ControlledComponentContext = createContext<ControlledComponentType>({controlled:'welcomePage', setControlled:()=>{}});
 
 const ControlledComponentContextProvider = (props:ControlledComponentContextProviderProps) => {
-    const [controlled, setControlled] = useState<string>('itemGrid');
+    const [controlled, setControlled] = useState<string>('welcomePage');  
+
     return (  
         <ControlledComponentContext.Provider value={{controlled, setControlled} as ControlledComponentType}>
             { props.children }

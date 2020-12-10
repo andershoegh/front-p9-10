@@ -1,13 +1,17 @@
 .tile {
     text-align: center;
     padding: 3em;
-    width: 16em;
-    height: 16em;
+    width: 26vmin;
+    height: 26vmin;
     background-color: #fefefe;
     text-decoration: none;
     box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2vmin;
     &:hover {
         box-shadow: 0px 8px 40px rgba(205, 134, 60, 0.92);
         transform: scale(1.05);
@@ -19,12 +23,17 @@
     width: 100%;
     display: flex;
     justify-content: center;
+
+    svg {
+        width: 70%;
+    }
 }
 
 .tileText {
-    margin-top: 4em;
+    // margin-top: 4em;
     color: #666;
     font-weight: bold;
+    font-size: 1.6vmin;
 }
 
 a {

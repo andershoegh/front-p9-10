@@ -1,14 +1,16 @@
 .category-wrapper {
     float: left;
-    width: auto;
+    width: fit-content;
     height: 100vh;
-    margin-top: -5vh;
+    margin-top: -2vh;
     padding: calc(35px + 5vh) 10px;
     overflow: hidden;
     box-shadow: 2px 0px 32px -13px #5f5f5f;
 }
 .category-bar {
     display: flex;
+    align-items: center;
+    width: 20vw;
     transition: all 0.3s;
     flex-direction: column;
     
@@ -25,3 +27,8 @@
 }
 
 
+@media(max-width: 770px) {
+    .category-wrapper {
+        margin-top: -8vh;
+    }
+}

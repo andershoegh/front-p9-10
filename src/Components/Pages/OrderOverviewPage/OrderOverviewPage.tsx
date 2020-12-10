@@ -38,6 +38,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order, setOrder }
  
     const [ right, setRight ] = useState(true);
     const { controlled, setControlled } = useContext(ControlledComponentContext);
+    const orderContainer = document.querySelector('.order-overview');
 
     useEffect(()=>{
         const menusSteppers = document.querySelectorAll('.menuDisplay button');
@@ -163,8 +164,6 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order, setOrder }
                 nodeList[index]?.scrollIntoView({ behavior: 'smooth', block});
                 nodeList[index]?.classList.add('highlighted');
             }
-            
-
         }
     },[controlled, setControlled, higlightedItem, order]);
 
@@ -217,7 +216,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order, setOrder }
         const type = item.type === 'menu' ? 'menus': 'menuItems';
         setOrderNoteDetails({index, type});
         toggleModal(itemName);
-        setControlled('noteModal');
+        setControlled(controlled !== 'none' ? 'noteModal' : 'none');
     }
     return (
         <>

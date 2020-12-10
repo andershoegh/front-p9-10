@@ -53,8 +53,6 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                     case 'ArrowUp':
                         if(highlightedDiv > 0) {
                             setHighlightedDiv(divNum - 1);
-                        } else if(highlightedDiv === 0) {
-                            // Change to back button
                         }
                         break;
                     case 'ArrowDown':
@@ -68,20 +66,24 @@ const MenuSelection: React.FC<MenuSelectionProps> = (props) => {
                         if(divArrayFull[highlightedDiv] === drinksDiv) {
                             if(drinkNum > 0) {
                                 setHighlightedDrink(drinkNum - 1);
-                                drinksContainer?.scrollBy({
-                                    top: 0,
-                                    left: -200,
-                                    behavior: 'smooth'
-                                })
+                                if(drinkNum < (drinks.length - 2)) {
+                                    drinksContainer?.scrollBy({
+                                        top: 0,
+                                        left: -200,
+                                        behavior: 'smooth'
+                                    })
+                                }
                             }
                         } else if(divArrayFull[highlightedDiv] === sidesDiv) {
                             if(sideNum > 0) {
                                 setHighlightedSide(sideNum - 1);
-                                sidesContainer?.scrollBy({
-                                    top: 0,
-                                    left: -200,
-                                    behavior: 'smooth'
-                                })
+                                if(sideNum < (sides.length - 2)) {
+                                    sidesContainer?.scrollBy({
+                                        top: 0,
+                                        left: -200,
+                                        behavior: 'smooth'
+                                    })
+                                }
                             }
                         }
                         break;

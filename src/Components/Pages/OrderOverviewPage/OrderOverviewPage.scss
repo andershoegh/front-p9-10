@@ -1,5 +1,5 @@
 .order-overview{
-    height: 72vh;
+    height: 75vh;
     overflow: scroll;
 }
 .headline {
@@ -87,6 +87,34 @@
             border: 2px #949494 solid;
             border-radius: 38px;
             transform: translate(-50%, -50%);
+        }
+    }
+}
+
+@media(max-width: 770px) {
+    .menuDisplay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .menuCard {
+            width: 90vw;
+        }
+
+        .stepper-wrapper {
+            margin: 2vh 0;
+        }
+    }
+
+    .singleItemBlock {
+        .flatCard {
+            width: 150px;
+            height: 150px;
+            margin: 15px;
+
+            .text-container-centered {
+                font-size: 1.5vmin;
+            }
         }
     }
 }
