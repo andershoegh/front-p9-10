@@ -37,21 +37,40 @@
         &:focus,
         &:hover, &.highlighted {
             transform: scale(1.04);
-            box-shadow: 0px 0px 40px #fdd68b;
+            box-shadow: 0px 0px 10px #000;
         }
     }
     .finish-btn {
-        background-color: #048644;
+        background-color: transparent;
+        color: #048644;
+        border: 2px solid #048644;
         margin-left: 10px;
+        
+        &:focus,
+        &:hover, &.highlighted {
+            background-color: #048644;
+            color: white
+        }
+
         &.empty-basket{
             pointer-events: none;
             background-color: lightgrey;
+            color: white;
+            border: none;
             box-shadow: none;
         }
     }
     .cancel-btn {
-        background-color: #aa3b4a;
+        background-color: transparent;
+        border: 2px solid #aa3b4a;
+        color: #aa3b4a;
         margin-right: 10px;
+
+        &:focus,
+        &:hover, &.highlighted {
+            background-color: #aa3b4a;
+            color: white;
+        }
     }
 }
 

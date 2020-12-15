@@ -49,13 +49,13 @@
     }
 
     button {
-      background-color: #D29099;
-      color: white;
+      background-color: transparent;
+      color: #D29099;
+      border: 2px solid #D29099;
       font-weight: 600;
       font-size: 1.3em;
 
       width: fit-content;
-      border-style: none;
       margin: 2% 0;
       padding: 15px 50px;
       border-radius: 8px;
@@ -67,6 +67,7 @@
       &:hover,
       &.highlighted {
         box-shadow: 0px 5px 8px rgba(0, 0, 0, .2);
+        color: white;
         background-color: change-color($color: #D29099, $saturation: 90%, $alpha: 1.0);
         transform: scale(1.1);
       }
