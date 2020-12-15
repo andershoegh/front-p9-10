@@ -8,8 +8,11 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
 
-  animation-name: fadeIn;
-  animation-duration: .5s;
+  -webkit-animation-name: fadeIn;
+
+          animation-name: fadeIn;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
 
   .modal-content {
     display: flex;
@@ -17,6 +20,8 @@
     bottom: 0;
     left: 0;
     right: 0;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: auto;
     padding: 40px 80px;
@@ -31,8 +36,11 @@
 
     font-family: 'Open Sans', sans-serif;
 
-    animation-name: fromBottom;
-    animation-duration: .5s;
+    -webkit-animation-name: fromBottom;
+
+            animation-name: fromBottom;
+    -webkit-animation-duration: .5s;
+            animation-duration: .5s;
     
     h2 {
       text-align: center;
@@ -55,6 +63,10 @@
       font-weight: 600;
       font-size: 1.3em;
 
+      width: -webkit-fit-content;
+
+      width: -moz-fit-content;
+
       width: fit-content;
       margin: 2% 0;
       padding: 15px 50px;
@@ -75,9 +87,19 @@
   }
 }
 
+@-webkit-keyframes fromBottom {
+  from { bottom: -100px; opacity: 0 }
+  to { bottom: 0; opacity: 1 }
+}
+
 @keyframes fromBottom {
   from { bottom: -100px; opacity: 0 }
   to { bottom: 0; opacity: 1 }
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 100 }
 }
 
 @keyframes fadeIn {

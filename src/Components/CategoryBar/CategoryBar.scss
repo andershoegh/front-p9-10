@@ -1,5 +1,7 @@
 .category-wrapper {
     float: left;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     height: 100vh;
     margin-top: -2vh;

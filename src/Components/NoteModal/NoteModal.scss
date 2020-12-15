@@ -8,8 +8,11 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
   
-    animation-name: fadeIn;
-    animation-duration: .5s;
+    -webkit-animation-name: fadeIn;
+  
+            animation-name: fadeIn;
+    -webkit-animation-duration: .5s;
+            animation-duration: .5s;
   
     .modal-content {
       display: flex;
@@ -17,6 +20,8 @@
       top: 50vh;
       left: 0;
       right: 0;
+      width: -webkit-fit-content;
+      width: -moz-fit-content;
       width: fit-content;
       margin: auto;
       padding: 40px;
@@ -29,8 +34,11 @@
   
       font-family: 'Open Sans', sans-serif;
   
-      animation-name: slideUp;
-      animation-duration: .5s;
+      -webkit-animation-name: slideUp;
+  
+              animation-name: slideUp;
+      -webkit-animation-duration: .5s;
+              animation-duration: .5s;
       
       h2 {
         text-align: center;

@@ -23,9 +23,12 @@
 
 .item-scroll-container {
     display: flex;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     flex-flow: row nowrap;
-    column-gap: 25px;
+    -moz-column-gap: 25px;
+         column-gap: 25px;
     padding: 20px 3vw 2.5vh;
 }
 
