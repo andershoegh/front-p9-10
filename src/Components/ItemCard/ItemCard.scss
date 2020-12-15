@@ -17,7 +17,8 @@ $card-scale: 2em;
   transform-origin: center;
 
   &:hover, &:focus {
-    box-shadow: 0px 0px 40px #FDD68B;
+    border-radius: 10px;
+    box-shadow: 0 0 0 4px rgb(63, 70, 170);
     transform: scale(1.1);
     outline: none;
   }
@@ -59,10 +60,8 @@ $card-scale: 2em;
 }
 
 .highlighted {
+    border-radius: 10px;
     box-shadow: 0 0 0 4px rgb(63, 70, 170);
     transform: scale(1.1);
     outline: none;
 }
-
-
-

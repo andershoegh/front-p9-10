@@ -38,7 +38,7 @@ const OrderOverviewPage: React.FC<OrderOverviewPageProps> = ({ order, setOrder }
  
     const [ right, setRight ] = useState(true);
     const { controlled, setControlled } = useContext(ControlledComponentContext);
-    const orderContainer = document.querySelector('.order-overview');
+    // const orderContainer = document.querySelector('.order-overview');
 
     useEffect(()=>{
         const menusSteppers = document.querySelectorAll('.menuDisplay button');

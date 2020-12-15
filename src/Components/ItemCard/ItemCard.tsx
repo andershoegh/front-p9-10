@@ -68,7 +68,7 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
           orderSelection(name);
         }
     }
-  },[ addItemToOrder, item, toggleModal, orderSelection, onClick, type, name, setSelectedItem, setControlled]);
+  },[ addItemToOrder, item, toggleModal, orderSelection, onClick, type, name, setSelectedItem, controlled, setControlled]);
 
   useEffect(() => {
       if(enterPress && name === highlightedItem && setEnterPress) {
