@@ -1,7 +1,7 @@
 #finish-page {
     width: 100vw;
     height: 100vh;
-    background-color:#46bf5b;
+    background-color: #46bf5b;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -9,20 +9,19 @@
     padding: 10vh 0px;
     color: white;
     overflow: scroll;
-    >div:nth-last-child(1){
+    > div:nth-last-child(1) {
         margin-bottom: 15vh;
-        
     }
-    .header{
+    .header {
         font-size: 6vmin;
         font-weight: 700;
         text-align: center;
     }
-    .sub-header{
+    .sub-header {
         font-size: 4vmin;
         font-weight: 600;
     }
-    .receipt{
+    .receipt {
         position: relative;
         padding: 1em 1.5em;
         margin: 2em auto;
@@ -37,94 +36,95 @@
         align-items: center;
         font-size: 3rem;
         font-weight: 500;
-        > div:not(:first-child){
+        > div:not(:first-child) {
             padding: 20px 0px;
         }
-        
-        .restaurant-icon{
+
+        .restaurant-icon {
             position: absolute;
             top: 0;
             left: 0;
             transform: translate(30%, 30%);
         }
-        .restaurant-details, .receipt-header{
+        .restaurant-details,
+        .receipt-header {
             font-size: 2.5vmin;
             font-weight: 400;
-            
         }
-        >div:not(:nth-last-child(1)){
+        > div:not(:nth-last-child(1)) {
             border-bottom: 3px dashed #808080;
             text-align: center;
             width: 100%;
         }
-        .receipt-restaurant{
+        .receipt-restaurant {
             padding-bottom: 35px;
             font-size: 5vmin;
         }
         &:before {
-            content: "";
+            content: '';
             position: absolute;
             top: -1px;
             right: -1px;
             border-style: solid;
             background: #e6e6e6;
-            box-shadow: -1px 3px 1px rgba(0, 0, 0, 0.2), -3px 1px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: -1px 3px 1px rgba(0, 0, 0, 0.2),
+                -3px 1px 0px rgba(0, 0, 0, 0.2);
             display: block;
             width: 0;
             border-width: 15px;
             border-color: #46bf5b #46bf5b transparent transparent;
             border-radius: 0 0 0 5px;
-          }  
-          .bought-items{
-              width:100%;
-          }
+        }
+        .bought-items {
+            width: 100%;
+        }
     }
-    .table{
+    .table {
         display: table;
         font-size: 3vmin;
-        width:100%;
-        .table-header{
+        width: 100%;
+        .table-header {
             display: table-header-group;
             font-weight: 700;
-            >div{
+            > div {
                 display: table-cell;
             }
         }
-        .table-body{
+        .table-body {
             display: table-row-group;
         }
-        .table-row{
+        .table-row {
             display: table-row;
         }
-        .table-cell{
+        .table-cell {
             display: table-cell;
         }
-        .amount{
+        .amount {
             text-align: center;
         }
-        .price{
+        .price {
             text-align: right;
             padding-left: 20px;
         }
-        .desc, .item{
+        .desc,
+        .item {
             text-align: left;
         }
-        .menu-items{
+        .menu-items {
             font-weight: 400;
             color: grey;
             padding-left: 35px;
         }
     }
-    .sum-up{
+    .sum-up {
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         font-size: 6vmin;
     }
-    .thanks{
+    .thanks {
         margin-top: 1em;
         font-size: 2.3vmin;
-
     }
 }

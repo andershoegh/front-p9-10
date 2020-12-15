@@ -1,105 +1,125 @@
 #cancel-modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-
-  -webkit-animation-name: fadeIn;
-
-          animation-name: fadeIn;
-  -webkit-animation-duration: .5s;
-          animation-duration: .5s;
-
-  .modal-content {
-    display: flex;
-    position: absolute;
-    top: 50vh;
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
-    right: 0;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
-    margin: auto;
-    padding: 40px;
-    
-    background-color: white;
-    border: 1px solid #888;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
-    border-radius: 8px;
-    
-    flex-direction: column;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
 
-    font-family: 'Open Sans', sans-serif;
+    -webkit-animation-name: fadeIn;
 
-    -webkit-animation-name: slideUp;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
 
-            animation-name: slideUp;
-    -webkit-animation-duration: .5s;
-            animation-duration: .5s;
-    
-    h2 {
-      text-align: center;
-      font-weight: 400;
-      margin: 25px 0 50px 0;
-    }
+    .modal-content {
+        display: flex;
+        position: absolute;
+        top: 50vh;
+        left: 0;
+        right: 0;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin: auto;
+        padding: 40px;
 
-    .button-container {
-      display: flex;
-      width: 100%;
-      gap: 40px;
-      justify-content: center;
+        background-color: white;
+        border: 1px solid #888;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
 
-      button {
-        padding: 20px;
-        border-radius: 10px;
-        border: none;
-        font-size: 2.7vmin;
-        font-weight: 600;
-        color: #fff;
-        transform-origin: center;
-        transition: 0.2s ease-in-out;
-        box-shadow: 0px 0px 5px #000;
-        &:focus,
-        &:hover,
-        &.highlighted {
-            transform: scale(1.1);
-            box-shadow: 0px 0px 10px #000;
+        flex-direction: column;
+
+        font-family: 'Open Sans', sans-serif;
+
+        -webkit-animation-name: slideUp;
+
+        animation-name: slideUp;
+        -webkit-animation-duration: 0.5s;
+        animation-duration: 0.5s;
+
+        h2 {
+            text-align: center;
+            font-weight: 400;
+            margin: 25px 0 50px 0;
         }
-      }
 
-      .yes-button {
-        background-color: #048644;
-        width: 30vw;
-      }
+        .button-container {
+            display: flex;
+            width: 100%;
+            gap: 40px;
+            justify-content: center;
 
-      .no-button {
-        background-color: #aa3b4a;
-        width: 30vw;
-      }
+            button {
+                padding: 20px;
+                border-radius: 10px;
+                border: none;
+                font-size: 2.7vmin;
+                font-weight: 600;
+                color: #fff;
+                transform-origin: center;
+                transition: 0.2s ease-in-out;
+                box-shadow: 0px 0px 5px #000;
+                &:focus,
+                &:hover,
+                &.highlighted {
+                    transform: scale(1.1);
+                    box-shadow: 0px 0px 10px #000;
+                }
+            }
+
+            .yes-button {
+                background-color: #048644;
+                width: 30vw;
+            }
+
+            .no-button {
+                background-color: #aa3b4a;
+                width: 30vw;
+            }
+        }
     }
-  }
 }
 
 @-webkit-keyframes slideUp {
-  from { top: calc(50vh + 100px); opacity: 0 }
-  to { top: 50vh; opacity: 1 }
+    from {
+        top: calc(50vh + 100px);
+        opacity: 0;
+    }
+    to {
+        top: 50vh;
+        opacity: 1;
+    }
 }
 
 @keyframes slideUp {
-  from { top: calc(50vh + 100px); opacity: 0 }
-  to { top: 50vh; opacity: 1 }
+    from {
+        top: calc(50vh + 100px);
+        opacity: 0;
+    }
+    to {
+        top: 50vh;
+        opacity: 1;
+    }
 }
 
 @-webkit-keyframes fadeIn {
-  from { opacity: 0 }
-  to { opacity: 100 }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0 }
-  to { opacity: 100 }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
