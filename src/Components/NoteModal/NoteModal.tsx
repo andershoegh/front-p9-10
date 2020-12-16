@@ -159,7 +159,7 @@ const NoteModal: React.FC<NoteModalProps> = (props) => {
     <div id="note-modal">
       <div className="modal-content">
         <h2>Add note to {item}</h2>
-        <textarea className="note-input" placeholder="Write any special preferences to your order here." value={note} onKeyUp={handleInput} onChange={handleInput}/>
+        <textarea className="note-input" placeholder="Tap to write any special preferences to your order here." value={note} onKeyUp={handleInput} onChange={handleInput}/>
         <div className="button-container">
             <button className="no-button" onClick={discardNote}>
               {(prevNote === note || ( prevNote && note ==='') ) ? 
