@@ -62,29 +62,12 @@ $card-scale: 2em;
     opacity: 1;
     position: absolute;
     opacity: .8;
-    // animation: gotToBottom 0.5s;
-    // animation-iteration-count: 1;
     transition: all 0.5s, opacity .3s .2s;
     div {
         background-color: white;
         padding: 7px 20px;
     }
 }
-
-// .card:after {
-//    content:'';
-//    position: absolute;
-//    min-width: var(--card-width);
-//    min-height: var(--card-height);
-//    height: inherit;
-//    width: inherit;
-//    top: 0;
-//    left: 0;
-// //    z-index: 1;
-//    background-color: orange;
-//    opacity: 0.5;
-   
-// }
 
 .selected {
     transform: scale(1.1);
