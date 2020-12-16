@@ -1,6 +1,7 @@
 $card-scale: 2em;
 
 .card {
+    // position: relative;
     min-width: var(--card-width);
     min-height: var(--card-height);
     border-radius: 10px;
@@ -54,6 +55,35 @@ $card-scale: 2em;
         }
     }
 }
+.ghost-element{
+    margin: 14px 12px;
+    box-shadow: none !important;
+    pointer-events: none !important;
+    opacity: 1;
+    position: absolute;
+    // animation: gotToBottom 0.5s;
+    // animation-iteration-count: 1;
+    transition: all 0.3s;
+    div {
+        background-color: white;
+        padding: 7px 20px;
+    }
+}
+
+// .card:after {
+//    content:'';
+//    position: absolute;
+//    min-width: var(--card-width);
+//    min-height: var(--card-height);
+//    height: inherit;
+//    width: inherit;
+//    top: 0;
+//    left: 0;
+// //    z-index: 1;
+//    background-color: orange;
+//    opacity: 0.5;
+   
+// }
 
 .selected {
     transform: scale(1.1);
