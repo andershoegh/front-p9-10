@@ -68,7 +68,9 @@ const ItemGrid: React.FC<ItemGridProps> = (props) => {
                     }
                     break;
                 case 'Enter':
-                    setEnterPress(true);
+                    const clickable = ((gridContain?.children[highlightedItemNumber] as HTMLDivElement).firstChild  as HTMLDivElement);
+                    clickable.click();
+                    //  setEnterPress(true);
                     break;
             }
         }
