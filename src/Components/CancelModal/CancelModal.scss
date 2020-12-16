@@ -50,7 +50,6 @@
         .button-container {
             display: flex;
             width: 100%;
-            gap: 40px;
             justify-content: center;
 
             button {
@@ -72,13 +71,28 @@
             }
 
             .yes-button {
-                background-color: #048644;
+                color: #048644;
+                border: 2px solid #048644;
+                background-color: transparent;
                 width: 30vw;
+
+                &.highlighted {
+                    color: white;
+                    background-color: #048644;
+                }
             }
 
             .no-button {
-                background-color: #aa3b4a;
+                color: #aa3b4a;
+                border: 2px solid #aa3b4a;
+                background-color: transparent;
                 width: 30vw;
+                margin-right: 40px;
+
+                &.highlighted {
+                    color: white;
+                    background-color: #aa3b4a;
+                }
             }
         }
     }
