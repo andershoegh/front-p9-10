@@ -1,6 +1,7 @@
 $card-scale: 2em;
 
 .card {
+    // position: relative;
     min-width: var(--card-width);
     min-height: var(--card-height);
     border-radius: 10px;
@@ -52,6 +53,19 @@ $card-scale: 2em;
             align-self: center;
             margin: 0 5px;
         }
+    }
+}
+.ghost-element{
+    margin: 14px 12px;
+    box-shadow: none !important;
+    pointer-events: none !important;
+    opacity: 1;
+    position: absolute;
+    opacity: .8;
+    transition: all 0.5s, opacity .3s .2s;
+    div {
+        background-color: white;
+        padding: 7px 20px;
     }
 }
 

@@ -46,7 +46,29 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
   const route = './products/' + imgSrc;
   const  { controlled, setControlled } = useContext(ControlledComponentContext);
 
-  const onClickAction = useCallback(() => {
+  const onClickAction = useCallback((e?) => {
+    const addToCartAnimation = (e: Event) => {
+      const node = e.currentTarget as HTMLDivElement;
+      const rect = node.getBoundingClientRect();
+      const targetRect = (document.querySelector('.order-details') as HTMLDivElement).getBoundingClientRect();
+      const cln = node.cloneNode(true) as HTMLDivElement;
+      const app = document.getElementById('root')?.firstChild as HTMLDivElement;
+      cln.classList.add('ghost-element');
+      cln.style.left = rect.left + 'px';
+      cln.style.top = rect.top + 'px';
+      app.appendChild(cln);
+      setTimeout(()=> {
+        cln.style.left = '50%';
+        cln.style.top = targetRect.top + (targetRect.height/2) +'px';
+        cln.style.opacity = '0';
+        cln.style.transform = 'translateX(-50%)';
+      }, 10);
+    
+      setTimeout(()=>{
+        app.removeChild(cln);
+      }, 500);
+     
+      }
     switch (type) {
       case 'category':
         if(onClick) {
@@ -58,13 +80,21 @@ const ItemCard: React.FC<ItemCardProps> = (props) => {
           toggleModal(true, item);
           setControlled(controlled !== 'none' ? 'orderSelectionModal' : 'none');
         } else if(addItemToOrder && item) {
+          if(e){
+            addToCartAnimation(e)
+          }
           addItemToOrder(item);
+        
         } else if(setSelectedItem && item) {
           setSelectedItem(item);
         }
+        
         break;
       case 'order selection':
         if(orderSelection) {
+          if(name === 'Single' && e){
+            addToCartAnimation(e);
+          }
           orderSelection(name);
         }
     }

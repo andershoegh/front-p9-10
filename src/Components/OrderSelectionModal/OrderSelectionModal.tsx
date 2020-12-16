@@ -24,20 +24,21 @@ const OrderSelectionModal: React.FC<OrderSelectionModalInterface> = (props) => {
 
     const orderSelection = (type: string) => {
         if (type === 'Single') {
-        toggleModal(false);
-        handleMenu(false);
+            toggleModal(false);
+            handleMenu(false);
+            console.log('do stuff')
         } else if (type === 'Menu') {
-        toggleModal(false);
-        handleMenu(true);
-        history.push('/menuselection');
+            toggleModal(false);
+            handleMenu(true);
+            history.push('/menuselection');
         }
     }
 
     if(modal) {
         if (showModal) {
-        modal.style.display = 'block';
+            modal.style.display = 'block';
         } else {
-        modal.style.display = 'none';
+            modal.style.display = 'none';
         }
     }
 
