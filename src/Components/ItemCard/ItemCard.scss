@@ -61,9 +61,10 @@ $card-scale: 2em;
     pointer-events: none !important;
     opacity: 1;
     position: absolute;
+    opacity: .8;
     // animation: gotToBottom 0.5s;
     // animation-iteration-count: 1;
-    transition: all 0.3s;
+    transition: all 0.5s, opacity .3s .2s;
     div {
         background-color: white;
         padding: 7px 20px;
